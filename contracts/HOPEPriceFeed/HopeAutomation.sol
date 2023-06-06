@@ -29,7 +29,6 @@ contract HopeAutomation is Ownable2Step, AutomationCompatibleInterface {
     _setAggregator(_aggregator);
     _setHeartbeat(_heartbeat);
     _setDeviationThreshold(_deviationThreshold);
-    lastTimestamp = block.timestamp;
   }
 
   function setHeartbeat(uint256 _heartbeat) external onlyOwner {
@@ -95,7 +94,7 @@ contract HopeAutomation is Ownable2Step, AutomationCompatibleInterface {
       } else {
         thresholdMet = lastPrice - price >= (deviationThreshold * lastPrice) / THRESHOLD_FACTOR;
       }
-      upkeepNeeded = upkeepNeeded && thresholdMet;
+      upkeepNeeded = upkeepNeeded || thresholdMet;
     }
   }
 
