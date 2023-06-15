@@ -1,0 +1,28 @@
+[
+  {
+    "inputs": [],
+    "name": "CALLER_NOT_ASSET_LISTING_OR_POOL_ADMIN",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "INCONSISTENT_PARAMS_LENGTH",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

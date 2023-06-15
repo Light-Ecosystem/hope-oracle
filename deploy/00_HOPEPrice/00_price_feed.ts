@@ -52,7 +52,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const HopeAggregator = await deploy('HopeAggregator', {
     from: deployer,
     contract: 'HopeAggregator',
-    args: [HOPEPriceDecimal[network], 'HOPE/USD', ZERO_ADDRESS],
+    args: [HOPEPriceDecimal[network], 'HOPE/USD'],
     log: true,
   });
 

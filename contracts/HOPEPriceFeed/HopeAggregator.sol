@@ -9,7 +9,7 @@ contract HopeAggregator is Ownable2Step, IHopeAggregator, AggregatorV2V3Interfac
   uint256 public constant override version = 1;
   uint8 public immutable override decimals;
   string public override description; // 'HOPE/USD'
-  address internal transmitter;
+  address public transmitter;
   uint80 internal roundId;
 
   struct Transmission {
@@ -25,10 +25,9 @@ contract HopeAggregator is Ownable2Step, IHopeAggregator, AggregatorV2V3Interfac
     _;
   }
 
-  constructor(uint8 _decimals, string memory _description, address _transmitter) {
+  constructor(uint8 _decimals, string memory _description) {
     decimals = _decimals;
     description = _description;
-    transmitter = _transmitter;
   }
 
   function updateTransmitter(address newTransmitter) external onlyOwner {

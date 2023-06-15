@@ -10,11 +10,6 @@
         "internalType": "string",
         "name": "_description",
         "type": "string"
-      },
-      {
-        "internalType": "address",
-        "name": "_transmitter",
-        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -360,6 +355,19 @@
     "name": "transmit",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "transmitter",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
