@@ -14,9 +14,9 @@ import { parseUnits } from 'ethers/lib/utils';
 import Bluebird from 'bluebird';
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
-  const { getNamedAccounts, deployments } = hre;
+  const { getNamedAccounts, deployments, ethers } = hre;
   const { deploy } = deployments;
-  const { deployer } = await getNamedAccounts();
+  const { deployer, operator } = await getNamedAccounts();
   const network = (process.env.FORK ? process.env.FORK : hre.network.name) as eEthereumNetwork;
 
   const isLive = hre.config.networks[network].live;
@@ -52,6 +52,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     args: [assets, sources, ZERO_ADDRESS, parseUnits('1', '8')],
     log: true,
   });
+
+  if(!isLive) {
+    // Set HopeFallbackOracle Operator
+    const HopeFallbackOracleInstance = await ethers.getContractAt(HopeFallbackOracle.abi, HopeFallbackOracle.address);
+    await HopeFallbackOracleInstance.addOperator(operator);
+  }
 };
 
 // This script can only be run successfully once per market, core version, and network

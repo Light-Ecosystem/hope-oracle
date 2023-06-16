@@ -7,6 +7,9 @@ export const DEFAULT_NAMED_ACCOUNTS = {
   deployer: {
     default: 0,
   },
+  operator: {
+    default: 1,
+  }
 };
 
 export const TESTNET_PRICE_AGGR_PREFIX = `-TestnetPriceAggregator-FallbackOracle`;
@@ -15,36 +18,42 @@ export const HOPEPriceDecimal: Record<string, number> = {
   main: 8,
   [eEthereumNetwork.goerli]: 8,
   [eEthereumNetwork.sepolia]: 8,
+  hardhat: 8,
 };
 
 export const HOPEPriceHeartbeat: Record<string, number> = {
   main: 3600,
   [eEthereumNetwork.goerli]: 3600,
   [eEthereumNetwork.sepolia]: 3600,
+  hardhat: 3600,
 };
 
 export const HOPEPriceThreshold: Record<string, number> = {
   main: 100,
   [eEthereumNetwork.goerli]: 100,
   [eEthereumNetwork.sepolia]: 100,
+  hardhat: 100,
 };
 
 export const HOPEAddress: Record<string, string> = {
   main: '0xc353Bf07405304AeaB75F4C2Fac7E88D6A68f98e',
   [eEthereumNetwork.goerli]: '0x12843dFa0eaf7017de47cD46218618B0991E238e',
   [eEthereumNetwork.sepolia]: '0x784388A036cb9c8c680002F43354E856f816F844',
+  hardhat: '0xD5C33721220Bc75f0BBD970E64D5807350DEB3C5',
 };
 
 export const chainlinkEthUsdAggregatorProxy: Record<string, string> = {
   main: '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419',
   [eEthereumNetwork.goerli]: '',
   [eEthereumNetwork.sepolia]: '0xb8eDE1c9cE926117D5e0D82b6B0e03cf5fC26d60',
+  hardhat: '0xD5C33721220Bc75f0BBD970E64D5807350DEB3C5',
 };
 
 export const chainlinkBtcUsdAggregatorProxy: Record<string, string> = {
   main: '0xf4030086522a5beea4988f8ca5b36dbc97bee88c',
   [eEthereumNetwork.goerli]: '',
   [eEthereumNetwork.sepolia]: '0xd981d04700477a58d3e83F6A025f881B156Ba20e',
+  hardhat: '0xD5C33721220Bc75f0BBD970E64D5807350DEB3C5',
 };
 
 export const PoolAddressesProvider: Record<string, string> = {
@@ -116,6 +125,17 @@ export const ReserveAssets: iParamsPerNetwork<SymbolMap<tEthereumAddress>> = {
     USDT: ZERO_ADDRESS,
     EURS: ZERO_ADDRESS,
   },
+  hardhat: {
+    DAI: '0xc527C4003B0554A5703FA666D7D45dB205e3de99',
+    LINK: '0x027b143919AE292f61386AA6dE06f892e1C947d9',
+    USDC: '0x6A9d4913AC8266A1dEbCfC6d5B6Ea275Fd19cD85',
+    WBTC: '0x8520E10eA26c761a98bE06eA252cd30E83f4FB4B',
+    WETH: '0x218B00cfb6f4ae38c43c83d1E6eBA8f25FD2324C',
+    USDT: '0x62D8460025DE81982C843B14E7F18Ff2273ea491',
+    HOPE: '0x784388A036cb9c8c680002F43354E856f816F844',
+    StakingHOPE: '0x092c325a98e50BE78A140cD043D49904fFB8Ea1F',
+    EURS: '0x0fdcBABb76c0A60a9F28e60940027C48dF88347A',
+  },
 };
 
 export const getChainlinkOracles = async (network: eEthereumNetwork) => {
@@ -167,4 +187,7 @@ export const getPairsTokenAggregator = (
 export enum ProtocolErrors {
   CALLER_NOT_ASSET_LISTING_OR_POOL_ADMIN = '5', // 'The caller of the function is not an asset listing or pool admin'
   INCONSISTENT_PARAMS_LENGTH = '76', // 'Array parameters that should be equal length are not'
+  ZERO_ADDRESS_NOT_VALID = '77', // 'Zero address not valid'
+  FAILOVER_ALREADY_ACTIVE = '92', // Failover is already active
+  FAILOVER_ALREADY_DEACTIVATED = '93', // Failover is already deactivated
 }

@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: LGPL-3.0
 pragma solidity 0.8.17;
 
-import {Ownable2Step} from '../dependencies/openzeppelin/Ownable2Step.sol';
+import {HopeAccessControl} from '../access/HopeAccessControl.sol';
 import {AggregatorV2V3Interface} from '../dependencies/chainlink/AggregatorV2V3Interface.sol';
 import {IHOPE} from '../interfaces/IHOPE.sol';
 import {IHOPEPriceFeed} from '../interfaces/IHOPEPriceFeed.sol';
 
-contract HOPEPriceFeed is Ownable2Step, IHOPEPriceFeed {
+contract HOPEPriceFeed is HopeAccessControl, IHOPEPriceFeed {
   uint256 private constant K_FACTOR = 1e20;
   uint256 private constant PRICE_SCALE = 1e8;
   uint256 public immutable K; // 1080180484347501
@@ -35,7 +35,7 @@ contract HOPEPriceFeed is Ownable2Step, IHOPEPriceFeed {
     address[] memory tokens,
     address[] memory priceFeeds,
     uint256[] memory factors
-  ) external onlyOwner {
+  ) external onlyRole(OPERATOR_ROLE) {
     require(tokens.length == priceFeeds.length, 'HOPEPriceFeeds: Invalid input');
     require(tokens.length == factors.length, 'HOPEPriceFeeds: Invalid input');
 

@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity 0.8.17;
 
-import {Ownable2Step} from '../dependencies/openzeppelin/Ownable2Step.sol';
-import {AggregatorV2V3Interface} from '../dependencies/chainlink/AggregatorV2V3Interface.sol';
 import {IHopeAggregator} from '../interfaces/IHopeAggregator.sol';
+import {HopeAccessControl} from '../access/HopeAccessControl.sol';
 
-contract HopeAggregator is Ownable2Step, IHopeAggregator, AggregatorV2V3Interface {
+contract HopeAggregator is HopeAccessControl, IHopeAggregator {
   uint256 public constant override version = 1;
   uint8 public immutable override decimals;
   string public override description; // 'HOPE/USD'
@@ -18,24 +17,12 @@ contract HopeAggregator is Ownable2Step, IHopeAggregator, AggregatorV2V3Interfac
   }
   mapping(uint80 /* aggregator round ID */ => Transmission) internal transmissions;
 
-  event TransmitterUpdated(address newTransmitter);
-
-  modifier isTransmitter() {
-    require(msg.sender == transmitter, 'HopeAggregator: caller is not the transmitter');
-    _;
-  }
-
   constructor(uint8 _decimals, string memory _description) {
     decimals = _decimals;
     description = _description;
   }
 
-  function updateTransmitter(address newTransmitter) external onlyOwner {
-    transmitter = newTransmitter;
-    emit TransmitterUpdated(newTransmitter);
-  }
-
-  function transmit(uint256 _answer) external override isTransmitter {
+  function transmit(uint256 _answer) external override onlyRole(OPERATOR_ROLE) {
     roundId++;
     int192 currentPrice = int192(int256(_answer));
     transmissions[roundId] = Transmission(currentPrice, uint64(block.timestamp));

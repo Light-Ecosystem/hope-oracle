@@ -3,7 +3,7 @@ pragma solidity 0.8.17;
 
 import {AggregatorInterface} from './dependencies/chainlink/AggregatorInterface.sol';
 import {Errors} from './libraries/Errors.sol';
-import {Ownable2Step} from './dependencies/openzeppelin/Ownable2Step.sol';
+import {HopeAccessControl} from './access/HopeAccessControl.sol';
 import {IHopeFallbackOracle} from './interfaces/IHopeFallbackOracle.sol';
 
 /**
@@ -13,7 +13,7 @@ import {IHopeFallbackOracle} from './interfaces/IHopeFallbackOracle.sol';
  * - Use of Chainlink Aggregators as first source of price
  * - Owned by the Hope governance
  */
-contract HopeFallbackOracle is IHopeFallbackOracle, Ownable2Step {
+contract HopeFallbackOracle is IHopeFallbackOracle, HopeAccessControl {
 
   // Map of asset price sources (asset => AggregatorInterface)
   mapping(address => AggregatorInterface) private assetsSources;
@@ -44,7 +44,7 @@ contract HopeFallbackOracle is IHopeFallbackOracle, Ownable2Step {
   function setAssetSources(
     address[] calldata assets,
     address[] calldata sources
-  ) external override onlyOwner {
+  ) external override onlyRole(OPERATOR_ROLE) {
     _setAssetsSources(assets, sources);
   }
 

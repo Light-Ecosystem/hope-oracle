@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity 0.8.17;
 
-import {Ownable2Step} from '../dependencies/openzeppelin/Ownable2Step.sol';
+import {HopeAccessControl} from '../access/HopeAccessControl.sol';
 import {AutomationCompatibleInterface} from '../dependencies/chainlink/AutomationCompatibleInterface.sol';
 import {IHOPEPriceFeed} from '../interfaces/IHOPEPriceFeed.sol';
 import {IHopeAggregator} from '../interfaces/IHopeAggregator.sol';
 
-contract HopeAutomation is Ownable2Step, AutomationCompatibleInterface {
+contract HopeAutomation is HopeAccessControl, AutomationCompatibleInterface {
   uint256 internal constant THRESHOLD_FACTOR = 1e4;
 
   address public priceFeed;
@@ -31,19 +31,19 @@ contract HopeAutomation is Ownable2Step, AutomationCompatibleInterface {
     _setDeviationThreshold(_deviationThreshold);
   }
 
-  function setHeartbeat(uint256 _heartbeat) external onlyOwner {
+  function setHeartbeat(uint256 _heartbeat) external onlyRole(OPERATOR_ROLE) {
     _setHeartbeat(_heartbeat);
   }
 
-  function setDeviationThreshold(uint256 _deviationThreshold) external onlyOwner {
+  function setDeviationThreshold(uint256 _deviationThreshold) external onlyRole(OPERATOR_ROLE) {
     _setDeviationThreshold(_deviationThreshold);
   }
 
-  function setHOPEPriceFeed(address _priceFeed) external onlyOwner {
+  function setHOPEPriceFeed(address _priceFeed) external onlyRole(OPERATOR_ROLE) {
     _setHOPEPriceFeed(_priceFeed);
   }
 
-  function setAggregator(address _aggregator) external onlyOwner {
+  function setAggregator(address _aggregator) external onlyRole(OPERATOR_ROLE) {
     _setAggregator(_aggregator);
   }
 

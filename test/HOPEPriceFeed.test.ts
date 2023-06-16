@@ -20,6 +20,7 @@ describe('HOPEPriceFeed', () => {
   const K = 1080180484347501;
   const ETHMaskAddress = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';
   const BTCMaskAddress = '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB';
+  const role = '0x97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b929';
 
   async function deployTestFixture() {
     const [owner, addr1, ...addrs] = await ethers.getSigners();
@@ -33,6 +34,7 @@ describe('HOPEPriceFeed', () => {
     const HOPEPriceFeed = await ethers.getContractFactory('HOPEPriceFeed');
     const priceFeed = await HOPEPriceFeed.deploy(ETHMaskAddress, ETHMaskAddress, HOPEMockToken.address, K);
     console.log('HOPEPriceFeed deploy address: ', priceFeed.address);
+    await priceFeed.connect(owner).addOperator(addr1.address);
 
     const MockAggregator = await ethers.getContractFactory('MockAggregator');
     const ETHMockAggregator = await MockAggregator.deploy(ETHPrice);
@@ -58,14 +60,62 @@ describe('HOPEPriceFeed', () => {
     };
   }
 
-  it('Owner set reserve tokens', async () => {
+  it('Operator add operator', async () => {
+    const { owner, addr1, priceFeed } = await loadFixture(deployTestFixture);
+    expect(await priceFeed.isOperator(owner.address)).to.be.eq(false);
+    await priceFeed.connect(owner).addOperator(owner.address);
+    expect(await priceFeed.isOperator(owner.address)).to.be.eq(true);
+  });
+
+  it('Operator add address 0x00 as operator', async () => {
+    const { owner, addr1, priceFeed } = await loadFixture(deployTestFixture);
+
+    await expect(priceFeed.connect(owner).addOperator(ZERO_ADDRESS)).to.be.revertedWith(
+      ProtocolErrors.ZERO_ADDRESS_NOT_VALID
+    );
+  });
+
+  it('A non-operator user tries to add operator', async () => {
+    const { owner, addr1, priceFeed } = await loadFixture(deployTestFixture);
+    expect(await priceFeed.isOperator(owner.address)).to.be.eq(false);
+    await expect(priceFeed.connect(addr1).addOperator(owner.address)).to.be.revertedWith(
+      `Ownable: caller is not the owner`
+    );
+    expect(await priceFeed.isOperator(owner.address)).to.be.eq(false);
+  });
+
+  it('Operator remove operator', async () => {
+    const { owner, addr1, priceFeed } = await loadFixture(deployTestFixture);
+    expect(await priceFeed.isOperator(addr1.address)).to.be.eq(true);
+    await priceFeed.connect(owner).removeOperator(addr1.address);
+    expect(await priceFeed.isOperator(addr1.address)).to.be.eq(false);
+  });
+
+  it('Operator remove address 0x00 as operator', async () => {
+    const { owner, addr1, priceFeed } = await loadFixture(deployTestFixture);
+
+    await expect(priceFeed.connect(owner).removeOperator(ZERO_ADDRESS)).to.be.revertedWith(
+      ProtocolErrors.ZERO_ADDRESS_NOT_VALID
+    );
+  });
+
+  it('A non-operator user tries to remove operator', async () => {
+    const { owner, addr1, priceFeed } = await loadFixture(deployTestFixture);
+    expect(await priceFeed.isOperator(addr1.address)).to.be.eq(true);
+    await expect(priceFeed.connect(addr1).removeOperator(addr1.address)).to.be.revertedWith(
+      `Ownable: caller is not the owner`
+    );
+    expect(await priceFeed.isOperator(addr1.address)).to.be.eq(true);
+  });
+
+  it('Operator set reserve tokens', async () => {
     const { owner, addr1, priceFeed } = await loadFixture(deployTestFixture);
 
     // setReserveTokens
     let tokens = [ETHMaskAddress, BTCMaskAddress];
     let sources = [ETHMockAggregatorAddress, BTCMockAggregatorAddress];
     let factors = [ETHFactor, BTCFactor];
-    expect(await priceFeed.connect(owner).setReserveTokens(tokens, sources, factors))
+    expect(await priceFeed.connect(addr1).setReserveTokens(tokens, sources, factors))
       .to.emit(priceFeed, 'ReserveUpdate')
       .withArgs(tokens, sources, factors);
 
@@ -78,28 +128,28 @@ describe('HOPEPriceFeed', () => {
     ]);
   });
 
-  it('A non-owner user tries to set reserve tokens', async () => {
+  it('A non-operator user tries to set reserve tokens', async () => {
     const { owner, addr1, priceFeed } = await loadFixture(deployTestFixture);
 
     // setReserveTokens
     let tokens = [ETHMaskAddress, BTCMaskAddress];
     let sources = [ETHMockAggregatorAddress, BTCMockAggregatorAddress];
     let factors = [ETHFactor, BTCFactor];
-    await expect(priceFeed.connect(addr1).setReserveTokens(tokens, sources, factors)).to.be.revertedWith(
-      'Ownable: caller is not the owner'
+    await expect(priceFeed.connect(owner).setReserveTokens(tokens, sources, factors)).to.be.revertedWith(
+      `AccessControl: account ${owner.address.toLowerCase()} is missing role ${role}`
     );
 
     expect(await priceFeed.getReserveTokens()).to.deep.eq([]);
   });
 
-  it('Owner add reserve tokens', async () => {
+  it('Operator add reserve tokens', async () => {
     const { owner, addr1, CRVMockToken, priceFeed } = await loadFixture(deployTestFixture);
 
     // setReserveTokens
     let tokens = [ETHMaskAddress, BTCMaskAddress];
     let sources = [ETHMockAggregatorAddress, BTCMockAggregatorAddress];
     let factors = [ETHFactor, BTCFactor];
-    expect(await priceFeed.connect(owner).setReserveTokens(tokens, sources, factors))
+    expect(await priceFeed.connect(addr1).setReserveTokens(tokens, sources, factors))
       .to.emit(priceFeed, 'ReserveUpdate')
       .withArgs(tokens, sources, factors);
 
@@ -108,7 +158,7 @@ describe('HOPEPriceFeed', () => {
     let addedTokens = [CRVMockToken.address];
     let addedSources = [CRVMockAggregatorAddress];
     let addedFactors = [CRVFactor];
-    expect(await priceFeed.connect(owner).setReserveTokens(addedTokens, addedSources, addedFactors))
+    expect(await priceFeed.connect(addr1).setReserveTokens(addedTokens, addedSources, addedFactors))
       .to.emit(priceFeed, 'ReserveUpdate')
       .withArgs(addedTokens, addedSources, addedFactors);
 
@@ -121,14 +171,14 @@ describe('HOPEPriceFeed', () => {
     ]);
   });
 
-  it('Owner del reserve tokens', async () => {
+  it('Operator del reserve tokens', async () => {
     const { owner, addr1, priceFeed } = await loadFixture(deployTestFixture);
 
     // setReserveTokens
     let tokens = [ETHMaskAddress, BTCMaskAddress];
     let sources = [ETHMockAggregatorAddress, BTCMockAggregatorAddress];
     let factors = [ETHFactor, BTCFactor];
-    expect(await priceFeed.connect(owner).setReserveTokens(tokens, sources, factors))
+    expect(await priceFeed.connect(addr1).setReserveTokens(tokens, sources, factors))
       .to.emit(priceFeed, 'ReserveUpdate')
       .withArgs(tokens, sources, factors);
 
@@ -142,7 +192,7 @@ describe('HOPEPriceFeed', () => {
     let delTokens = [ETHMaskAddress];
     let delSources = [ETHMockAggregatorAddress];
     let delFactors = [0];
-    expect(await priceFeed.connect(owner).setReserveTokens(delTokens, delSources, delFactors))
+    expect(await priceFeed.connect(addr1).setReserveTokens(delTokens, delSources, delFactors))
       .to.emit(priceFeed, 'ReserveUpdate')
       .withArgs(delTokens, delSources, delFactors);
 
@@ -165,7 +215,7 @@ describe('HOPEPriceFeed', () => {
     let tokens = [ETHMaskAddress, BTCMaskAddress];
     let sources = [ETHMockAggregatorAddress, BTCMockAggregatorAddress];
     let factors = [ETHFactor, BTCFactor];
-    expect(await priceFeed.connect(owner).setReserveTokens(tokens, sources, factors))
+    expect(await priceFeed.connect(addr1).setReserveTokens(tokens, sources, factors))
       .to.emit(priceFeed, 'ReserveUpdate')
       .withArgs(tokens, sources, factors);
 
@@ -182,7 +232,7 @@ describe('HOPEPriceFeed', () => {
     let tokens = [ETHMaskAddress, BTCMaskAddress];
     let sources = [ETHMockAggregatorAddress, BTCMockAggregatorAddress];
     let factors = [ETHFactor, BTCFactor];
-    expect(await priceFeed.connect(owner).setReserveTokens(tokens, sources, factors))
+    expect(await priceFeed.connect(addr1).setReserveTokens(tokens, sources, factors))
       .to.emit(priceFeed, 'ReserveUpdate')
       .withArgs(tokens, sources, factors);
 
@@ -209,7 +259,7 @@ describe('HOPEPriceFeed', () => {
     let tokens = [ETHMaskAddress, BTCMaskAddress];
     let sources = [ETHMockAggregatorAddress, BTCMockAggregatorAddress];
     let factors = [ETHFactor, BTCFactor];
-    expect(await priceFeed.connect(owner).setReserveTokens(tokens, sources, factors))
+    expect(await priceFeed.connect(addr1).setReserveTokens(tokens, sources, factors))
       .to.emit(priceFeed, 'ReserveUpdate')
       .withArgs(tokens, sources, factors);
 

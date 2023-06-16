@@ -5,6 +5,8 @@ import { parseUnits } from 'ethers/lib/utils';
 import { MOCK_CHAINLINK_AGGREGATORS_PRICES, ZERO_ADDRESS, ProtocolErrors } from '../helpers/constants';
 
 describe('HopeFallbackOracle', () => {
+  const role = '0x97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b929';
+
   async function deployTestFixture() {
     const [owner, addr1, ...addrs] = await ethers.getSigners();
 
@@ -22,6 +24,7 @@ describe('HopeFallbackOracle', () => {
     const HopeFallbackOracle = await ethers.getContractFactory('HopeFallbackOracle');
     const hopeFallbackOracle = await HopeFallbackOracle.deploy([], [], ZERO_ADDRESS, parseUnits('1', '8'));
     console.log('HopeFallbackOracle deploy address: ', hopeFallbackOracle.address);
+    await hopeFallbackOracle.connect(owner).addOperator(addr1.address);
 
     return {
       owner,
@@ -35,7 +38,55 @@ describe('HopeFallbackOracle', () => {
     };
   }
 
-  it('Owner set a new asset source', async () => {
+  it('Owner add operator', async () => {
+    const { owner, addr1, hopeFallbackOracle } = await loadFixture(deployTestFixture);
+    expect(await hopeFallbackOracle.isOperator(owner.address)).to.be.eq(false);
+    await hopeFallbackOracle.connect(owner).addOperator(owner.address);
+    expect(await hopeFallbackOracle.isOperator(owner.address)).to.be.eq(true);
+  });
+
+  it('Owner add address 0x00 as operator', async () => {
+    const { owner, addr1, hopeFallbackOracle } = await loadFixture(deployTestFixture);
+
+    await expect(hopeFallbackOracle.connect(owner).addOperator(ZERO_ADDRESS)).to.be.revertedWith(
+      ProtocolErrors.ZERO_ADDRESS_NOT_VALID
+    );
+  });
+
+  it('A non-owner user tries to add operator', async () => {
+    const { owner, addr1, hopeFallbackOracle } = await loadFixture(deployTestFixture);
+    expect(await hopeFallbackOracle.isOperator(owner.address)).to.be.eq(false);
+    await expect(hopeFallbackOracle.connect(addr1).addOperator(owner.address)).to.be.revertedWith(
+      `Ownable: caller is not the owner`
+    );
+    expect(await hopeFallbackOracle.isOperator(owner.address)).to.be.eq(false);
+  });
+
+  it('Owner remove operator', async () => {
+    const { owner, addr1, hopeFallbackOracle } = await loadFixture(deployTestFixture);
+    expect(await hopeFallbackOracle.isOperator(addr1.address)).to.be.eq(true);
+    await hopeFallbackOracle.connect(owner).removeOperator(addr1.address);
+    expect(await hopeFallbackOracle.isOperator(addr1.address)).to.be.eq(false);
+  });
+
+  it('Owner remove address 0x00 as operator', async () => {
+    const { owner, addr1, hopeFallbackOracle } = await loadFixture(deployTestFixture);
+
+    await expect(hopeFallbackOracle.connect(owner).removeOperator(ZERO_ADDRESS)).to.be.revertedWith(
+      ProtocolErrors.ZERO_ADDRESS_NOT_VALID
+    );
+  });
+
+  it('A non-owner user tries to remove operator', async () => {
+    const { owner, addr1, hopeFallbackOracle } = await loadFixture(deployTestFixture);
+    expect(await hopeFallbackOracle.isOperator(addr1.address)).to.be.eq(true);
+    await expect(hopeFallbackOracle.connect(addr1).removeOperator(addr1.address)).to.be.revertedWith(
+      `Ownable: caller is not the owner`
+    );
+    expect(await hopeFallbackOracle.isOperator(addr1.address)).to.be.eq(true);
+  });
+
+  it('Operator set a new asset source', async () => {
     const { owner, addr1, mockToken, CRVPrice, CRVMockAggregator, hopeFallbackOracle } = await loadFixture(
       deployTestFixture
     );
@@ -44,7 +95,7 @@ describe('HopeFallbackOracle', () => {
     expect(await hopeFallbackOracle.getSourceOfAsset(mockToken.address)).to.be.eq(ZERO_ADDRESS);
 
     // Add asset source
-    expect(await hopeFallbackOracle.connect(owner).setAssetSources([mockToken.address], [CRVMockAggregator.address]))
+    expect(await hopeFallbackOracle.connect(addr1).setAssetSources([mockToken.address], [CRVMockAggregator.address]))
       .to.emit(hopeFallbackOracle, 'AssetSourceUpdated')
       .withArgs(mockToken.address, CRVMockAggregator.address);
 
@@ -56,32 +107,31 @@ describe('HopeFallbackOracle', () => {
     expect(sourcesPrices).to.eql([CRVPrice]);
   });
 
-  it('Owner update an existing asset source', async () => {
-    const { owner, addr1, mockToken, CRVPrice, CRVMockAggregator, ZeroMockAggregator, hopeFallbackOracle } = await loadFixture(
-        deployTestFixture
-      );
+  it('Operator update an existing asset source', async () => {
+    const { owner, addr1, mockToken, CRVPrice, CRVMockAggregator, ZeroMockAggregator, hopeFallbackOracle } =
+      await loadFixture(deployTestFixture);
 
     // Add asset source
-    expect(await hopeFallbackOracle.connect(owner).setAssetSources([mockToken.address], [CRVMockAggregator.address]))
+    expect(await hopeFallbackOracle.connect(addr1).setAssetSources([mockToken.address], [CRVMockAggregator.address]))
       .to.emit(hopeFallbackOracle, 'AssetSourceUpdated')
       .withArgs(mockToken.address, CRVMockAggregator.address);
-      expect(await hopeFallbackOracle.getSourceOfAsset(mockToken.address)).to.be.eq(CRVMockAggregator.address);
-      expect(await hopeFallbackOracle.getAssetPrice(mockToken.address)).to.be.eq(CRVPrice);
+    expect(await hopeFallbackOracle.getSourceOfAsset(mockToken.address)).to.be.eq(CRVMockAggregator.address);
+    expect(await hopeFallbackOracle.getAssetPrice(mockToken.address)).to.be.eq(CRVPrice);
 
     // Update asset source
-    expect(await hopeFallbackOracle.connect(owner).setAssetSources([mockToken.address], [ZeroMockAggregator.address]))
+    expect(await hopeFallbackOracle.connect(addr1).setAssetSources([mockToken.address], [ZeroMockAggregator.address]))
       .to.emit(hopeFallbackOracle, 'AssetSourceUpdated')
       .withArgs(mockToken.address, ZeroMockAggregator.address);
-      expect(await hopeFallbackOracle.getSourceOfAsset(mockToken.address)).to.be.eq(ZeroMockAggregator.address);
-      expect(await hopeFallbackOracle.getAssetPrice(mockToken.address)).to.be.eq(0);
+    expect(await hopeFallbackOracle.getSourceOfAsset(mockToken.address)).to.be.eq(ZeroMockAggregator.address);
+    expect(await hopeFallbackOracle.getAssetPrice(mockToken.address)).to.be.eq(0);
   });
 
-  it('Owner tries to set a new asset source with wrong input params (revert expected)', async () => {
-    const { owner, mockToken, hopeFallbackOracle } = await loadFixture(deployTestFixture);
+  it('Operator tries to set a new asset source with wrong input params (revert expected)', async () => {
+    const { owner, addr1, mockToken, hopeFallbackOracle } = await loadFixture(deployTestFixture);
 
-    await expect(
-      hopeFallbackOracle.connect(owner).setAssetSources([mockToken.address], [])
-    ).to.be.revertedWith(ProtocolErrors.INCONSISTENT_PARAMS_LENGTH);
+    await expect(hopeFallbackOracle.connect(addr1).setAssetSources([mockToken.address], [])).to.be.revertedWith(
+      ProtocolErrors.INCONSISTENT_PARAMS_LENGTH
+    );
   });
 
   it('Get price of BASE_CURRENCY asset', async () => {
@@ -93,12 +143,12 @@ describe('HopeFallbackOracle', () => {
     );
   });
 
-  it('A non-owner user tries to set a new asset source (revert expected)', async () => {
+  it('A non-operator user tries to set a new asset source (revert expected)', async () => {
     const { owner, addr1, mockToken, CRVMockAggregator, hopeFallbackOracle } = await loadFixture(deployTestFixture);
 
     await expect(
-      hopeFallbackOracle.connect(addr1).setAssetSources([mockToken.address], [CRVMockAggregator.address])
-    ).to.be.revertedWith("Ownable: caller is not the owner");
+      hopeFallbackOracle.connect(owner).setAssetSources([mockToken.address], [CRVMockAggregator.address])
+    ).to.be.revertedWith(`AccessControl: account ${owner.address.toLowerCase()} is missing role ${role}`);
   });
 
   it('Get price of asset with no asset source', async () => {
@@ -107,7 +157,6 @@ describe('HopeFallbackOracle', () => {
     // Asset has no source
     expect(await hopeFallbackOracle.getSourceOfAsset(mockToken.address)).to.be.eq(ZERO_ADDRESS);
 
-    
     await expect(hopeFallbackOracle.getAssetPrice(mockToken.address)).to.be.revertedWithoutReason();
     await expect(hopeFallbackOracle.getAssetsPrices([mockToken.address])).to.be.revertedWithoutReason();
   });
