@@ -5,7 +5,7 @@ import {AggregatorInterface} from './dependencies/chainlink/AggregatorInterface.
 import {Errors} from './libraries/Errors.sol';
 import {IPriceOracleGetter} from './interfaces/IPriceOracleGetter.sol';
 import {IHopeOracle} from './interfaces/IHopeOracle.sol';
-import {HopeAccessControl} from './access/HopeAccessControl.sol';
+import {HopeOneRole} from './access/HopeOneRole.sol';
 
 /**
  * @title HopeOracle
@@ -15,7 +15,7 @@ import {HopeAccessControl} from './access/HopeAccessControl.sol';
  * - If the returned price by a Chainlink aggregator is <= 0, the call is forwarded to a fallback oracle
  * - Owned by the Hope governance
  */
-contract HopeOracle is IHopeOracle, HopeAccessControl {
+contract HopeOracle is IHopeOracle, HopeOneRole {
   struct PriceData {
     AggregatorInterface source;
     bool failoverActive;

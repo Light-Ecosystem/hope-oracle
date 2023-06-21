@@ -3,7 +3,7 @@ pragma solidity 0.8.17;
 
 import {AggregatorInterface} from './dependencies/chainlink/AggregatorInterface.sol';
 import {Errors} from './libraries/Errors.sol';
-import {HopeAccessControl} from './access/HopeAccessControl.sol';
+import {HopeOneRole} from './access/HopeOneRole.sol';
 import {IHopeFallbackOracle} from './interfaces/IHopeFallbackOracle.sol';
 
 /**
@@ -13,8 +13,7 @@ import {IHopeFallbackOracle} from './interfaces/IHopeFallbackOracle.sol';
  * - Use of Chainlink Aggregators as first source of price
  * - Owned by the Hope governance
  */
-contract HopeFallbackOracle is IHopeFallbackOracle, HopeAccessControl {
-
+contract HopeFallbackOracle is IHopeFallbackOracle, HopeOneRole {
   // Map of asset price sources (asset => AggregatorInterface)
   mapping(address => AggregatorInterface) private assetsSources;
 
@@ -28,12 +27,7 @@ contract HopeFallbackOracle is IHopeFallbackOracle, HopeAccessControl {
    * @param baseCurrency The base currency used for the price quotes. If USD is used, base currency is 0x0
    * @param baseCurrencyUnit The unit of the base currency
    */
-  constructor(
-    address[] memory assets,
-    address[] memory sources,
-    address baseCurrency,
-    uint256 baseCurrencyUnit
-  ) {
+  constructor(address[] memory assets, address[] memory sources, address baseCurrency, uint256 baseCurrencyUnit) {
     _setAssetsSources(assets, sources);
     BASE_CURRENCY = baseCurrency;
     BASE_CURRENCY_UNIT = baseCurrencyUnit;

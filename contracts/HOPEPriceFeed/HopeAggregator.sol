@@ -2,9 +2,9 @@
 pragma solidity 0.8.17;
 
 import {IHopeAggregator} from '../interfaces/IHopeAggregator.sol';
-import {HopeAccessControl} from '../access/HopeAccessControl.sol';
+import {HopeOneRole} from '../access/HopeOneRole.sol';
 
-contract HopeAggregator is HopeAccessControl, IHopeAggregator {
+contract HopeAggregator is HopeOneRole, IHopeAggregator {
   uint256 public constant override version = 1;
   uint8 public immutable override decimals;
   string public override description; // 'HOPE/USD'

@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity 0.8.17;
 
-import {HopeAccessControl} from '../access/HopeAccessControl.sol';
+import {HopeOneRole} from '../access/HopeOneRole.sol';
 import {AutomationCompatibleInterface} from '../dependencies/chainlink/AutomationCompatibleInterface.sol';
 import {IHOPEPriceFeed} from '../interfaces/IHOPEPriceFeed.sol';
 import {IHopeAggregator} from '../interfaces/IHopeAggregator.sol';
 
-contract HopeAutomation is HopeAccessControl, AutomationCompatibleInterface {
+contract HopeAutomation is HopeOneRole, AutomationCompatibleInterface {
   uint256 internal constant THRESHOLD_FACTOR = 1e4;
 
   address public priceFeed;
