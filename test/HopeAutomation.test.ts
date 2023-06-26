@@ -224,7 +224,7 @@ describe('HopeAutomation', () => {
     await hopeAutomation.performUpkeep('0x00');
     expect(await hopeAggregator.latestAnswer()).to.be.eq(targetPrice.toBigInt());
 
-    // test deviationThreshold
+    // test deviationThreshold for price increases
     expect(await hopeAutomation.checkUpkeep('0x00')).to.deep.eq([false, '0x']);
     let newETHPrice = parseUnits('4000', 8);
     let newBTCPrice = parseUnits('60000', 8);
@@ -237,5 +237,25 @@ describe('HopeAutomation', () => {
     expect(await hopeAutomation.checkUpkeep('0x00')).to.deep.eq([true, '0x']);
     await hopeAutomation.performUpkeep('0x00');
     expect(await hopeAggregator.latestAnswer()).to.be.eq(parseUnits('1', 8));
+
+    // test deviationThreshold for price decreases
+    expect(await hopeAutomation.checkUpkeep('0x00')).to.deep.eq([false, '0x']);
+    newETHPrice = parseUnits('1000', 8);
+    newBTCPrice = parseUnits('10000', 8);
+    await ETHMockAggregator.connect(addr1).setLatestAnswer(newETHPrice);
+    await BTCMockAggregator.connect(addr1).setLatestAnswer(newBTCPrice);
+    expect(await priceFeed.getReservePrice(ETHMaskAddress)).to.be.eq(newETHPrice);
+    expect(await priceFeed.getReservePrice(BTCMaskAddress)).to.be.eq(newBTCPrice);
+
+    targetPrice = HOPETotalSupply.mul(K)
+      .div(parseUnits('1', 20))
+      .mul(ETHFactor)
+      .mul(newETHPrice)
+      .add(HOPETotalSupply.mul(K).div(parseUnits('1', 20)).mul(newBTCPrice))
+      .div(HOPETotalSupply);
+    expect(await priceFeed.latestAnswer()).to.be.eq(targetPrice.toBigInt());
+    expect(await hopeAutomation.checkUpkeep('0x00')).to.deep.eq([true, '0x']);
+    await hopeAutomation.performUpkeep('0x00');
+    expect(await hopeAggregator.latestAnswer()).to.be.eq(targetPrice.toBigInt());
   });
 });
