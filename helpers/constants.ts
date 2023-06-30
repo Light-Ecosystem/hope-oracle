@@ -9,7 +9,7 @@ export const DEFAULT_NAMED_ACCOUNTS = {
   },
   operator: {
     default: 1,
-  }
+  },
 };
 
 export const TESTNET_PRICE_AGGR_PREFIX = `-TestnetPriceAggregator-FallbackOracle`;
@@ -44,22 +44,15 @@ export const HOPEAddress: Record<string, string> = {
 
 export const chainlinkEthUsdAggregatorProxy: Record<string, string> = {
   main: '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419',
-  [eEthereumNetwork.goerli]: '',
+  [eEthereumNetwork.goerli]: '0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e',
   [eEthereumNetwork.sepolia]: '0xb8eDE1c9cE926117D5e0D82b6B0e03cf5fC26d60',
   hardhat: '0xD5C33721220Bc75f0BBD970E64D5807350DEB3C5',
 };
 
 export const chainlinkBtcUsdAggregatorProxy: Record<string, string> = {
   main: '0xf4030086522a5beea4988f8ca5b36dbc97bee88c',
-  [eEthereumNetwork.goerli]: '',
+  [eEthereumNetwork.goerli]: '0xA39434A63A52E749F02807ae27335515BA4b07F7',
   [eEthereumNetwork.sepolia]: '0xd981d04700477a58d3e83F6A025f881B156Ba20e',
-  hardhat: '0xD5C33721220Bc75f0BBD970E64D5807350DEB3C5',
-};
-
-export const PoolAddressesProvider: Record<string, string> = {
-  main: '',
-  [eEthereumNetwork.goerli]: '',
-  [eEthereumNetwork.sepolia]: '0xD5C33721220Bc75f0BBD970E64D5807350DEB3C5',
   hardhat: '0xD5C33721220Bc75f0BBD970E64D5807350DEB3C5',
 };
 
@@ -71,7 +64,8 @@ export const MOCK_CHAINLINK_AGGREGATORS_PRICES: { [key: string]: string } = {
   DAI: parseUnits('1.001', 8).toString(),
   USDC: parseUnits('1.001', 8).toString(),
   USDT: parseUnits('1.001', 8).toString(),
-  WBTC: parseUnits('30001', 8).toString(),
+  BTC: parseUnits('30001', 8).toString(),
+  WBTC_BTC: parseUnits('0.99895', 8).toString(),
   USD: parseUnits('1', 8).toString(),
   LINK: parseUnits('5', 8).toString(),
   CRV: parseUnits('6', 8).toString(),

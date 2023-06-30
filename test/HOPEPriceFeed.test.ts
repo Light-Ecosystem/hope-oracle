@@ -11,7 +11,7 @@ describe('HOPEPriceFeed', () => {
   let BTCMockAggregatorAddress: string;
   let CRVMockAggregatorAddress: string;
   let ETHPrice = MOCK_CHAINLINK_AGGREGATORS_PRICES.ETH;
-  let BTCPrice = MOCK_CHAINLINK_AGGREGATORS_PRICES.WBTC;
+  let BTCPrice = MOCK_CHAINLINK_AGGREGATORS_PRICES.BTC;
   let CRVPrice = MOCK_CHAINLINK_AGGREGATORS_PRICES.CRV;
   let ETHFactor = 10;
   let BTCFactor = 1;

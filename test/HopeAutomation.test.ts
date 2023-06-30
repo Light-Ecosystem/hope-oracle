@@ -15,7 +15,7 @@ describe('HopeAutomation', () => {
   let ETHMockAggregatorAddress: string;
   let BTCMockAggregatorAddress: string;
   let ETHPrice = MOCK_CHAINLINK_AGGREGATORS_PRICES.ETH;
-  let BTCPrice = MOCK_CHAINLINK_AGGREGATORS_PRICES.WBTC;
+  let BTCPrice = MOCK_CHAINLINK_AGGREGATORS_PRICES.BTC;
   let ETHFactor = 10;
   let BTCFactor = 1;
   let HOPETotalSupply = parseUnits('20000000000', 18);
