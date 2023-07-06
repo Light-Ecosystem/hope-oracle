@@ -7,7 +7,8 @@ import {
   HOPEPriceThreshold,
   chainlinkBtcUsdAggregatorProxy,
   chainlinkEthUsdAggregatorProxy,
-} from '../../helpers/constants';
+} from '../../helpers/configs';
+import { DeployIDs } from '../../helpers/constants';
 import { eEthereumNetwork } from '../../helpers/types';
 import { waitForTx } from '../../helpers/tx';
 
@@ -27,32 +28,15 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   console.log(`\nDeploying HOPEPriceFeed...`);
   console.log('HOPE Address:', HOPEAddress[network]);
 
-  const HOPEPriceFeed = await deploy('HOPEPriceFeed', {
+  const HOPEPriceFeed = await deploy(DeployIDs.HOPEPriceFeed_ID, {
     from: deployer,
     contract: 'HOPEPriceFeed',
     args: [ETHMaskAddress, BTCMaskAddress, HOPEAddress[network], K],
     log: true,
   });
 
-  // 1.1 Set HOPEPriceFeed Operator
-  if (!isLive) {
-    console.log(`\nHOPEPriceFeed Setting Operator...`);
-    const HOPEPriceFeedInstance = await ethers.getContractAt(HOPEPriceFeed.abi, HOPEPriceFeed.address);
-    await waitForTx(await HOPEPriceFeedInstance.addOperator(operator));
-
-    // 1.2 Set Reserve Tokens
-    console.log(`\nHOPEPriceFeed Setting Reserve Tokens...`);
-    await waitForTx(
-      await HOPEPriceFeedInstance.connect(await ethers.getSigner(operator)).setReserveTokens(
-        [ETHMaskAddress, BTCMaskAddress],
-        [chainlinkEthUsdAggregatorProxy[network], chainlinkBtcUsdAggregatorProxy[network]],
-        [10, 1]
-      )
-    );
-  }
-
   // 2. Deploy HopeAggregator
-  const HopeAggregator = await deploy('HopeAggregator', {
+  const HopeAggregator = await deploy(DeployIDs.HopeAggregator_ID, {
     from: deployer,
     contract: 'HopeAggregator',
     args: [HOPEPriceDecimal[network], 'HOPE/USD'],
@@ -60,19 +44,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   });
 
   // 3. Deploy HopeAutomation
-  const HopeAutomation = await deploy('HopeAutomation', {
+  const HopeAutomation = await deploy(DeployIDs.HopeAutomation_ID, {
     from: deployer,
     contract: 'HopeAutomation',
     args: [HOPEPriceFeed.address, HopeAggregator.address, HOPEPriceHeartbeat[network], HOPEPriceThreshold[network]],
     log: true,
   });
-
-  // 3.1 add HopeAutomation Operator
-  if (!isLive) {
-    console.log(`\nHopeAutomation Setting Operator...`);
-    const HopeAutomationInstance = await ethers.getContractAt(HopeAutomation.abi, HopeAutomation.address);
-    await waitForTx(await HopeAutomationInstance.addOperator(operator));
-  }
 
   // 4 Set HopeAggregator Operator
   const HopeAggregatorInstance = await ethers.getContractAt(HopeAggregator.abi, HopeAggregator.address);

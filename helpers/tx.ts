@@ -2,6 +2,7 @@ import { Contract, ContractTransaction, Signer } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import Bluebird from 'bluebird';
 import { formatEther } from 'ethers/lib/utils';
+import { tEthereumAddress } from './types';
 
 declare var hre: HardhatRuntimeEnvironment;
 
@@ -28,4 +29,15 @@ export const getWalletBalances = async () => {
     []
   );
   return accountTable;
+};
+
+export const getContract = async <ContractType extends Contract>(
+  id: string,
+  address?: tEthereumAddress
+): Promise<ContractType> => {
+  const artifact = await hre.deployments.getArtifact(id);
+  return hre.ethers.getContractAt(
+    artifact.abi,
+    address || (await (await hre.deployments.get(id)).address)
+  ) as any as ContractType;
 };

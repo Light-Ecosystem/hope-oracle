@@ -1,12 +1,6 @@
 import { task } from 'hardhat/config';
-import {
-  ZERO_ADDRESS,
-  TESTNET_PRICE_AGGR_PREFIX,
-  ReserveAssets,
-  MOCK_CHAINLINK_AGGREGATORS_PRICES,
-  getChainlinkOracles,
-  getPairsTokenAggregator,
-} from '../../helpers/constants';
+import { DeployIDs, ZERO_ADDRESS, ReserveAssets, MOCK_CHAINLINK_AGGREGATORS_PRICES } from '../../helpers/constants';
+import { getChainlinkOracles, getPairsTokenAggregator } from '../../helpers/contract-getter';
 import { eEthereumNetwork, SymbolMap, tEthereumAddress } from '../../helpers/types';
 import { parseUnits } from 'ethers/lib/utils';
 import Bluebird from 'bluebird';
@@ -30,7 +24,7 @@ task(`deploy-HopeOracle`).setAction(async (_, { ...hre }) => {
       if (!price) {
         throw `[ERROR] Missing mock price for asset ${symbol} at MOCK_CHAINLINK_AGGREGATORS_PRICES constant located at src/constants.ts`;
       }
-      await deploy(`${symbol}${TESTNET_PRICE_AGGR_PREFIX}`, {
+      await deploy(`${symbol}${DeployIDs.TESTNET_PRICE_AGGR_PREFIX}`, {
         args: [price],
         from: deployer,
         log: true,
@@ -44,7 +38,7 @@ task(`deploy-HopeOracle`).setAction(async (_, { ...hre }) => {
 
   const [assets, sources] = getPairsTokenAggregator(reserves, chainlinkAggregators);
 
-  const HopeOracle = await deploy('HopeOracle', {
+  const HopeOracle = await deploy(DeployIDs.HopeOracle_ID, {
     from: deployer,
     contract: 'HopeOracle',
     args: [assets, sources, ZERO_ADDRESS, ZERO_ADDRESS, parseUnits('1', '8')],

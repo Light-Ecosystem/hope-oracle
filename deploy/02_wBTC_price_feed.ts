@@ -1,6 +1,7 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { DeployFunction } from 'hardhat-deploy/types';
 import { eEthereumNetwork } from '../helpers/types';
+import { DeployIDs } from '../helpers/constants';
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { getNamedAccounts, deployments } = hre;
@@ -15,7 +16,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   // deploy wBTC price feed
   if (isLive) {
-    await deploy('CLSynchronicityPriceAdapterPegToBase', {
+    await deploy(DeployIDs.CLSynchronicityPriceAdapterPegToBase_ID, {
       from: deployer,
       contract: 'CLSynchronicityPriceAdapterPegToBase',
       args: [pegToBaseAggregatorAddress, assetToPegAggregatorAddress, decimals],
