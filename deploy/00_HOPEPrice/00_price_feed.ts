@@ -1,13 +1,6 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { DeployFunction } from 'hardhat-deploy/types';
-import {
-  HOPEAddress,
-  HOPEPriceDecimal,
-  HOPEPriceHeartbeat,
-  HOPEPriceThreshold,
-  chainlinkBtcUsdAggregatorProxy,
-  chainlinkEthUsdAggregatorProxy,
-} from '../../helpers/configs';
+import { Configs } from '../../helpers/configs';
 import { DeployIDs } from '../../helpers/constants';
 import { eEthereumNetwork } from '../../helpers/types';
 import { waitForTx } from '../../helpers/tx';
@@ -26,12 +19,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   // 1. Deploy HOPEPriceFeed
   console.log(`\nDeploying HOPEPriceFeed...`);
-  console.log('HOPE Address:', HOPEAddress[network]);
+  console.log('HOPE Address:', Configs[network].HOPE_address);
 
   const HOPEPriceFeed = await deploy(DeployIDs.HOPEPriceFeed_ID, {
     from: deployer,
     contract: 'HOPEPriceFeed',
-    args: [ETHMaskAddress, BTCMaskAddress, HOPEAddress[network], K],
+    args: [ETHMaskAddress, BTCMaskAddress, Configs[network].HOPE_address, K],
     log: true,
   });
 
@@ -39,7 +32,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const HopeAggregator = await deploy(DeployIDs.HopeAggregator_ID, {
     from: deployer,
     contract: 'HopeAggregator',
-    args: [HOPEPriceDecimal[network], 'HOPE/USD'],
+    args: [Configs[network].PriceFeed_decimals, 'HOPE/USD'],
     log: true,
   });
 
@@ -47,7 +40,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const HopeAutomation = await deploy(DeployIDs.HopeAutomation_ID, {
     from: deployer,
     contract: 'HopeAutomation',
-    args: [HOPEPriceFeed.address, HopeAggregator.address, HOPEPriceHeartbeat[network], HOPEPriceThreshold[network]],
+    args: [
+      HOPEPriceFeed.address,
+      HopeAggregator.address,
+      Configs[network].PriceFeed_heartbeat,
+      Configs[network].PriceFeed_threshold,
+    ],
     log: true,
   });
 

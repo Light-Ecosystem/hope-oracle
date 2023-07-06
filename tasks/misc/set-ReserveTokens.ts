@@ -1,6 +1,6 @@
 import { task } from 'hardhat/config';
 import { waitForTx } from '../../helpers/tx';
-import { chainlinkBtcUsdAggregatorProxy, chainlinkEthUsdAggregatorProxy } from '../../helpers/configs';
+import { Configs } from '../../helpers/configs';
 import { getHOPEPriceFeed } from '../../helpers/contract-getter';
 
 task(`set-reserveTokens`, 'Setup reserve tokens for HOPEPriceFeed').setAction(
@@ -19,7 +19,7 @@ task(`set-reserveTokens`, 'Setup reserve tokens for HOPEPriceFeed').setAction(
     await waitForTx(
       await HOPEPriceFeed.connect(await hre.ethers.getSigner(operator)).setReserveTokens(
         [ETHMaskAddress, BTCMaskAddress],
-        [chainlinkEthUsdAggregatorProxy[network], chainlinkBtcUsdAggregatorProxy[network]],
+        [Configs[network].chainlinkEthUsdAggregatorProxy, Configs[network].chainlinkBtcUsdAggregatorProxy],
         [10, 1]
       )
     );

@@ -23,3 +23,15 @@ export type tEthereumAddress = string;
 export interface ITokenAddress {
   [token: string]: tEthereumAddress;
 }
+
+export interface IBaseConfiguration {
+  PriceFeed_decimals: Number;
+  PriceFeed_heartbeat: Number;
+  PriceFeed_threshold: Number;
+  PriceFeed_operator: string;
+  HOPE_address: string;
+  chainlinkEthUsdAggregatorProxy: string;
+  chainlinkBtcUsdAggregatorProxy: string;
+  Automation_operator: string;
+  FallbackOracle_operator: string;
+}
