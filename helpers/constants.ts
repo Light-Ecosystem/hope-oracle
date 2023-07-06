@@ -63,14 +63,12 @@ export const ReserveAssets: iParamsPerNetwork<SymbolMap<tEthereumAddress>> = {
     stHOPE: '0xF5C6d9Fc73991F687f158FE30D4A77691a9Fd4d8',
   },
   [eEthereumNetwork.goerli]: {
-    HOPE: ZERO_ADDRESS,
-    DAI: ZERO_ADDRESS,
-    LINK: ZERO_ADDRESS,
     USDC: ZERO_ADDRESS,
     WBTC: ZERO_ADDRESS,
     WETH: ZERO_ADDRESS,
     USDT: ZERO_ADDRESS,
-    EURS: ZERO_ADDRESS,
+    HOPE: ZERO_ADDRESS,
+    stHOPE: ZERO_ADDRESS,
   },
   hardhat: {
     USDC: '0x6A9d4913AC8266A1dEbCfC6d5B6Ea275Fd19cD85',

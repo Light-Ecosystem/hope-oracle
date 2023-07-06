@@ -21,7 +21,7 @@ export const getInfuraKey = (net: eEthereumNetwork) => {
 };
 
 export const NETWORKS_RPC_URL: iParamsPerNetwork<string> = {
-  [eEthereumNetwork.main]: `https://eth-mainnet.alchemyapi.io/v2/${getInfuraKey(eEthereumNetwork.main)}`,
+  [eEthereumNetwork.main]: `https://mainnet.infura.io/v3/${getInfuraKey(eEthereumNetwork.main)}`,
   [eEthereumNetwork.coverage]: 'http://localhost:8555',
   [eEthereumNetwork.hardhat]: 'http://localhost:8545',
 
