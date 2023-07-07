@@ -28,13 +28,13 @@ export const Configs: { [key: string]: IBaseConfiguration } = {
   [eEthereumNetwork.sepolia]: {
     PriceFeed_decimals: 8,
     PriceFeed_heartbeat: 3600,
-    PriceFeed_threshold: 100,
-    PriceFeed_operator: '0x1Ee532cf775be02E0B306571e3555321FC75988d',
-    HOPE_address: '0x784388A036cb9c8c680002F43354E856f816F844',
-    chainlinkEthUsdAggregatorProxy: '0xb8eDE1c9cE926117D5e0D82b6B0e03cf5fC26d60',
-    chainlinkBtcUsdAggregatorProxy: '0xd981d04700477a58d3e83F6A025f881B156Ba20e',
-    Automation_operator: '0x1Ee532cf775be02E0B306571e3555321FC75988d',
-    FallbackOracle_operator: '0x1Ee532cf775be02E0B306571e3555321FC75988d',
+    PriceFeed_threshold: 50, // 0.5%
+    PriceFeed_operator: '0xcbeD65Db7E177D4875dDF5B67E13326A43a7B03f',
+    HOPE_address: '0x70C8C67CfbE228c7437Ec586a751a408e23355F4',
+    chainlinkEthUsdAggregatorProxy: '0x694AA1769357215DE4FAC081bf1f309aDC325306',
+    chainlinkBtcUsdAggregatorProxy: '0x1b44F3514812d835EB1BDB0acB33d3fA3351Ee43',
+    Automation_operator: '0xcbeD65Db7E177D4875dDF5B67E13326A43a7B03f',
+    FallbackOracle_operator: '0xcbeD65Db7E177D4875dDF5B67E13326A43a7B03f',
   },
   hardhat: {
     PriceFeed_decimals: 8,
