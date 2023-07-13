@@ -13,7 +13,7 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ..
 
   // Setup operators for each contract
   await hre.run('set-operators');
-  if (!isLive) {
+  if (!isLive && network !== eEthereumNetwork.goerli) {
     // Setup reserve tokens for HOPEPriceFeed
     await hre.run('set-reserveTokens');
   }

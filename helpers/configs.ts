@@ -16,14 +16,14 @@ export const Configs: { [key: string]: IBaseConfiguration } = {
   },
   [eEthereumNetwork.goerli]: {
     PriceFeed_decimals: 8,
-    PriceFeed_heartbeat: 3600,
-    PriceFeed_threshold: 100,
-    PriceFeed_operator: '',
-    HOPE_address: '0x12843dFa0eaf7017de47cD46218618B0991E238e',
+    PriceFeed_heartbeat: 43200, // 12h
+    PriceFeed_threshold: 50, // 0.5%
+    PriceFeed_operator: '0x3141f8D6BE4e4d9137577798C1e127Db81D196d7',
+    HOPE_address: '0x9bA97e0913Dd0fbd4E5fedA936db9D1f1C632273',
     chainlinkEthUsdAggregatorProxy: '0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e',
     chainlinkBtcUsdAggregatorProxy: '0xA39434A63A52E749F02807ae27335515BA4b07F7',
-    Automation_operator: '',
-    FallbackOracle_operator: '',
+    Automation_operator: '0x3141f8D6BE4e4d9137577798C1e127Db81D196d7',
+    FallbackOracle_operator: '0x3141f8D6BE4e4d9137577798C1e127Db81D196d7',
   },
   [eEthereumNetwork.sepolia]: {
     PriceFeed_decimals: 8,

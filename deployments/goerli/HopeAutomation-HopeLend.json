@@ -1,0 +1,891 @@
+{
+  "address": "0xC117f7a19DB9dABb1eE4E5CEd05fb042b4c54bBc",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_priceFeed",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_aggregator",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_heartbeat",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_deviationThreshold",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "newAggregator",
+          "type": "address"
+        }
+      ],
+      "name": "AggregatorUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newDeviationThreshold",
+          "type": "uint256"
+        }
+      ],
+      "name": "DeviationThresholdUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "newPriceFeed",
+          "type": "address"
+        }
+      ],
+      "name": "HOPEPriceFeedUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newHeartbeat",
+          "type": "uint256"
+        }
+      ],
+      "name": "HeartbeatUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferStarted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "PriceUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "previousAdminRole",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "newAdminRole",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RoleAdminChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleGranted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleRevoked",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "DEFAULT_ADMIN_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "OPERATOR_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "acceptOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_operator",
+          "type": "address"
+        }
+      ],
+      "name": "addOperator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "aggregator",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "checkUpkeep",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "upkeepNeeded",
+          "type": "bool"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "deviationThreshold",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRoleAdmin",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "grantRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "hasRole",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "heartbeat",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_operator",
+          "type": "address"
+        }
+      ],
+      "name": "isOperator",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "lastPrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "lastTimestamp",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pendingOwner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "performUpkeep",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "priceFeed",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_operator",
+          "type": "address"
+        }
+      ],
+      "name": "removeOperator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "renounceRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "revokeRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_aggregator",
+          "type": "address"
+        }
+      ],
+      "name": "setAggregator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_deviationThreshold",
+          "type": "uint256"
+        }
+      ],
+      "name": "setDeviationThreshold",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_priceFeed",
+          "type": "address"
+        }
+      ],
+      "name": "setHOPEPriceFeed",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_heartbeat",
+          "type": "uint256"
+        }
+      ],
+      "name": "setHeartbeat",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x10d46ab3c5137a17558c3f45fa9ddcc70a37383bd55846ad74ab3143ae923e86",
+  "receipt": {
+    "to": null,
+    "from": "0xcbeD65Db7E177D4875dDF5B67E13326A43a7B03f",
+    "contractAddress": "0xC117f7a19DB9dABb1eE4E5CEd05fb042b4c54bBc",
+    "transactionIndex": 21,
+    "gasUsed": "1535430",
+    "logsBloom": "0x00000000000000000000000400000000000000200000000000800000080000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000020000400000001040000000000000000000000800000000020020000000000000000000800000000000000000040000000004000400000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000400000200020000000000000002000000000000000000000000000000000000000000000080000",
+    "blockHash": "0x7062f2b5c4c39bd7ca408248487dc453f0c557343299a2a8420da2e404b6da26",
+    "transactionHash": "0x10d46ab3c5137a17558c3f45fa9ddcc70a37383bd55846ad74ab3143ae923e86",
+    "logs": [
+      {
+        "transactionIndex": 21,
+        "blockNumber": 9331912,
+        "transactionHash": "0x10d46ab3c5137a17558c3f45fa9ddcc70a37383bd55846ad74ab3143ae923e86",
+        "address": "0xC117f7a19DB9dABb1eE4E5CEd05fb042b4c54bBc",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x000000000000000000000000cbed65db7e177d4875ddf5b67e13326a43a7b03f"
+        ],
+        "data": "0x",
+        "logIndex": 60,
+        "blockHash": "0x7062f2b5c4c39bd7ca408248487dc453f0c557343299a2a8420da2e404b6da26"
+      },
+      {
+        "transactionIndex": 21,
+        "blockNumber": 9331912,
+        "transactionHash": "0x10d46ab3c5137a17558c3f45fa9ddcc70a37383bd55846ad74ab3143ae923e86",
+        "address": "0xC117f7a19DB9dABb1eE4E5CEd05fb042b4c54bBc",
+        "topics": [
+          "0x81d6cafd5ac0f5622e7437d9f7944c09c8da68fa4749117f58310f76e1aa96b8"
+        ],
+        "data": "0x000000000000000000000000c09babe270c7860c2e58959dce6dd9adecde7208",
+        "logIndex": 61,
+        "blockHash": "0x7062f2b5c4c39bd7ca408248487dc453f0c557343299a2a8420da2e404b6da26"
+      },
+      {
+        "transactionIndex": 21,
+        "blockNumber": 9331912,
+        "transactionHash": "0x10d46ab3c5137a17558c3f45fa9ddcc70a37383bd55846ad74ab3143ae923e86",
+        "address": "0xC117f7a19DB9dABb1eE4E5CEd05fb042b4c54bBc",
+        "topics": [
+          "0x602cec4b1583b07d071161da5eb9589444d2459201e2fab7753dc941e9351c21"
+        ],
+        "data": "0x00000000000000000000000099f4e627093d6bba806ea18284fb5c5ea1de6753",
+        "logIndex": 62,
+        "blockHash": "0x7062f2b5c4c39bd7ca408248487dc453f0c557343299a2a8420da2e404b6da26"
+      },
+      {
+        "transactionIndex": 21,
+        "blockNumber": 9331912,
+        "transactionHash": "0x10d46ab3c5137a17558c3f45fa9ddcc70a37383bd55846ad74ab3143ae923e86",
+        "address": "0xC117f7a19DB9dABb1eE4E5CEd05fb042b4c54bBc",
+        "topics": [
+          "0xc2178046992f7ede7649071430a5471a38fa34dc920c308b50d50c3271519b6d"
+        ],
+        "data": "0x000000000000000000000000000000000000000000000000000000000000a8c0",
+        "logIndex": 63,
+        "blockHash": "0x7062f2b5c4c39bd7ca408248487dc453f0c557343299a2a8420da2e404b6da26"
+      },
+      {
+        "transactionIndex": 21,
+        "blockNumber": 9331912,
+        "transactionHash": "0x10d46ab3c5137a17558c3f45fa9ddcc70a37383bd55846ad74ab3143ae923e86",
+        "address": "0xC117f7a19DB9dABb1eE4E5CEd05fb042b4c54bBc",
+        "topics": [
+          "0xfc6a7902b31c6ecdb0c5861232c559ad5a0836a4afdfd978472718132e487781"
+        ],
+        "data": "0x0000000000000000000000000000000000000000000000000000000000000032",
+        "logIndex": 64,
+        "blockHash": "0x7062f2b5c4c39bd7ca408248487dc453f0c557343299a2a8420da2e404b6da26"
+      }
+    ],
+    "blockNumber": 9331912,
+    "cumulativeGasUsed": "6735143",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0xC09bAbe270c7860C2E58959dCE6Dd9aDECde7208",
+    "0x99f4E627093D6Bba806ea18284fB5C5EA1De6753",
+    43200,
+    50
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "a02306f0ababf2fcfe58efec8c8dd921",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_priceFeed\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_aggregator\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_heartbeat\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_deviationThreshold\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newAggregator\",\"type\":\"address\"}],\"name\":\"AggregatorUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newDeviationThreshold\",\"type\":\"uint256\"}],\"name\":\"DeviationThresholdUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newPriceFeed\",\"type\":\"address\"}],\"name\":\"HOPEPriceFeedUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newHeartbeat\",\"type\":\"uint256\"}],\"name\":\"HeartbeatUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferStarted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"PriceUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\"}],\"name\":\"RoleAdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"DEFAULT_ADMIN_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"OPERATOR_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"acceptOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_operator\",\"type\":\"address\"}],\"name\":\"addOperator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"aggregator\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"checkUpkeep\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"upkeepNeeded\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"deviationThreshold\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"grantRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"heartbeat\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_operator\",\"type\":\"address\"}],\"name\":\"isOperator\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lastPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lastTimestamp\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pendingOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"performUpkeep\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"priceFeed\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_operator\",\"type\":\"address\"}],\"name\":\"removeOperator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"renounceRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"revokeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_aggregator\",\"type\":\"address\"}],\"name\":\"setAggregator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_deviationThreshold\",\"type\":\"uint256\"}],\"name\":\"setDeviationThreshold\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_priceFeed\",\"type\":\"address\"}],\"name\":\"setHOPEPriceFeed\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_heartbeat\",\"type\":\"uint256\"}],\"name\":\"setHeartbeat\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"acceptOwnership()\":{\"details\":\"The new owner accepts the ownership transfer.\"},\"getRoleAdmin(bytes32)\":{\"details\":\"Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.\"},\"grantRole(bytes32,address)\":{\"details\":\"Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleGranted} event.\"},\"hasRole(bytes32,address)\":{\"details\":\"Returns `true` if `account` has been granted `role`.\"},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"pendingOwner()\":{\"details\":\"Returns the address of the pending owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"renounceRole(bytes32,address)\":{\"details\":\"Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been revoked `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`. May emit a {RoleRevoked} event.\"},\"revokeRole(bytes32,address)\":{\"details\":\"Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleRevoked} event.\"},\"supportsInterface(bytes4)\":{\"details\":\"See {IERC165-supportsInterface}.\"},\"transferOwnership(address)\":{\"details\":\"Starts the ownership transfer of the contract to a new account. Replaces the pending transfer if there is one. Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/HOPEPriceFeed/HopeAutomation.sol\":\"HopeAutomation\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":100000},\"remappings\":[]},\"sources\":{\"contracts/HOPEPriceFeed/HopeAutomation.sol\":{\"content\":\"// SPDX-License-Identifier: GPL-3.0\\npragma solidity 0.8.17;\\n\\nimport {HopeOneRole} from '../access/HopeOneRole.sol';\\nimport {AutomationCompatibleInterface} from '../dependencies/chainlink/AutomationCompatibleInterface.sol';\\nimport {IHOPEPriceFeed} from '../interfaces/IHOPEPriceFeed.sol';\\nimport {IHopeAggregator} from '../interfaces/IHopeAggregator.sol';\\n\\ncontract HopeAutomation is HopeOneRole, AutomationCompatibleInterface {\\n  uint256 internal constant THRESHOLD_FACTOR = 1e4;\\n\\n  address public priceFeed;\\n  address public aggregator;\\n\\n  uint256 public heartbeat;\\n  uint256 public deviationThreshold;\\n\\n  uint256 public lastPrice;\\n  uint256 public lastTimestamp;\\n\\n  event HeartbeatUpdated(uint256 newHeartbeat);\\n  event DeviationThresholdUpdated(uint256 newDeviationThreshold);\\n  event HOPEPriceFeedUpdated(address newPriceFeed);\\n  event AggregatorUpdated(address newAggregator);\\n  event PriceUpdated(uint256 price, uint256 timestamp);\\n\\n  constructor(address _priceFeed, address _aggregator, uint256 _heartbeat, uint256 _deviationThreshold) {\\n    _setHOPEPriceFeed(_priceFeed);\\n    _setAggregator(_aggregator);\\n    _setHeartbeat(_heartbeat);\\n    _setDeviationThreshold(_deviationThreshold);\\n  }\\n\\n  function setHeartbeat(uint256 _heartbeat) external onlyRole(OPERATOR_ROLE) {\\n    _setHeartbeat(_heartbeat);\\n  }\\n\\n  function setDeviationThreshold(uint256 _deviationThreshold) external onlyRole(OPERATOR_ROLE) {\\n    _setDeviationThreshold(_deviationThreshold);\\n  }\\n\\n  function setHOPEPriceFeed(address _priceFeed) external onlyRole(OPERATOR_ROLE) {\\n    _setHOPEPriceFeed(_priceFeed);\\n  }\\n\\n  function setAggregator(address _aggregator) external onlyRole(OPERATOR_ROLE) {\\n    _setAggregator(_aggregator);\\n  }\\n\\n  function _setHeartbeat(uint256 _heartbeat) internal {\\n    heartbeat = _heartbeat;\\n    emit HeartbeatUpdated(_heartbeat);\\n  }\\n\\n  function _setDeviationThreshold(uint256 _deviationThreshold) internal {\\n    deviationThreshold = _deviationThreshold;\\n    emit DeviationThresholdUpdated(_deviationThreshold);\\n  }\\n\\n  function _setHOPEPriceFeed(address _priceFeed) internal {\\n    priceFeed = _priceFeed;\\n    emit HOPEPriceFeedUpdated(_priceFeed);\\n  }\\n\\n  function _setAggregator(address _aggregator) internal {\\n    aggregator = _aggregator;\\n    emit AggregatorUpdated(_aggregator);\\n  }\\n\\n  function checkUpkeep(\\n    bytes calldata /*checkData*/\\n  ) external view override returns (bool upkeepNeeded, bytes memory /*performData*/) {\\n    (, upkeepNeeded) = _checkUpKeep();\\n  }\\n\\n  function performUpkeep(bytes memory /*performData*/) external override {\\n    (uint256 price, bool upkeepNeeded) = _checkUpKeep();\\n    require(upkeepNeeded, 'HopeAutomation: upkeep not needed');\\n    lastPrice = price;\\n    lastTimestamp = block.timestamp;\\n    IHopeAggregator(aggregator).transmit(price);\\n\\n    emit PriceUpdated(price, block.timestamp);\\n  }\\n\\n  function _checkUpKeep() internal view returns (uint256 price, bool upkeepNeeded) {\\n    price = _getPrice();\\n    upkeepNeeded = price > 0;\\n    bool thresholdMet;\\n    unchecked {\\n      upkeepNeeded = upkeepNeeded && block.timestamp - lastTimestamp >= heartbeat;\\n      if (price >= lastPrice) {\\n        thresholdMet = price - lastPrice >= (deviationThreshold * lastPrice) / THRESHOLD_FACTOR;\\n      } else {\\n        thresholdMet = lastPrice - price >= (deviationThreshold * lastPrice) / THRESHOLD_FACTOR;\\n      }\\n      upkeepNeeded = upkeepNeeded || thresholdMet;\\n    }\\n  }\\n\\n  function _getPrice() internal view returns (uint256 price) {\\n    price = IHOPEPriceFeed(priceFeed).latestAnswer();\\n  }\\n}\\n\",\"keccak256\":\"0xdfe43de8c6cfac4c36bd12b5cad639a7b22d7a3bc0a80d93079f5e1b238e6498\",\"license\":\"GPL-3.0\"},\"contracts/access/HopeOneRole.sol\":{\"content\":\"// SPDX-License-Identifier: GPL-3.0\\npragma solidity 0.8.17;\\n\\nimport {Errors} from '../libraries/Errors.sol';\\nimport {Ownable2Step} from '../dependencies/openzeppelin/Ownable2Step.sol';\\nimport {AccessControl} from '../dependencies/openzeppelin/AccessControl.sol';\\n\\nabstract contract HopeOneRole is Ownable2Step, AccessControl {\\n  bytes32 public constant OPERATOR_ROLE = keccak256('OPERATOR_ROLE');\\n\\n  function isOperator(address _operator) external view returns (bool) {\\n    return hasRole(OPERATOR_ROLE, _operator);\\n  }\\n\\n  function addOperator(address _operator) external onlyOwner {\\n    require(_operator != address(0), Errors.ZERO_ADDRESS_NOT_VALID);\\n    _grantRole(OPERATOR_ROLE, _operator);\\n  }\\n\\n  function removeOperator(address _operator) external onlyOwner {\\n    require(_operator != address(0), Errors.ZERO_ADDRESS_NOT_VALID);\\n    _revokeRole(OPERATOR_ROLE, _operator);\\n  }\\n}\\n\",\"keccak256\":\"0x8a6f73d7b18bb744f48e5f0c0cca601ffb4ca48f71bc0f216474937087b7f48b\",\"license\":\"GPL-3.0\"},\"contracts/dependencies/chainlink/AggregatorInterface.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ninterface AggregatorInterface {\\n  function latestAnswer() external view returns (int256);\\n\\n  function latestTimestamp() external view returns (uint256);\\n\\n  function latestRound() external view returns (uint256);\\n\\n  function getAnswer(uint256 roundId) external view returns (int256);\\n\\n  function getTimestamp(uint256 roundId) external view returns (uint256);\\n\\n  event AnswerUpdated(int256 indexed current, uint256 indexed roundId, uint256 updatedAt);\\n\\n  event NewRound(uint256 indexed roundId, address indexed startedBy, uint256 startedAt);\\n}\",\"keccak256\":\"0xbe3ed5aeefac5fc22746c676e9a5ee53cba3edd3eda52676f5271ce2afe21fb0\",\"license\":\"MIT\"},\"contracts/dependencies/chainlink/AggregatorV2V3Interface.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\nimport \\\"./AggregatorInterface.sol\\\";\\nimport \\\"./AggregatorV3Interface.sol\\\";\\n\\ninterface AggregatorV2V3Interface is AggregatorInterface, AggregatorV3Interface {}\",\"keccak256\":\"0x1f11e9d2b70ad08651a918c99c4ce701547d375de4b646d35aabe4ba7fd0bcd3\",\"license\":\"MIT\"},\"contracts/dependencies/chainlink/AggregatorV3Interface.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ninterface AggregatorV3Interface {\\n  function decimals() external view returns (uint8);\\n\\n  function description() external view returns (string memory);\\n\\n  function version() external view returns (uint256);\\n\\n  function getRoundData(\\n    uint80 _roundId\\n  ) external view returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound);\\n\\n  function latestRoundData()\\n    external\\n    view\\n    returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound);\\n}\",\"keccak256\":\"0xe3e0540865adabd899265bc8f6ddaeb1eaa94d75900ca173303b08181fb8ca51\",\"license\":\"MIT\"},\"contracts/dependencies/chainlink/AutomationCompatibleInterface.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ninterface AutomationCompatibleInterface {\\n  /**\\n   * @notice method that is simulated by the keepers to see if any work actually\\n   * needs to be performed. This method does does not actually need to be\\n   * executable, and since it is only ever simulated it can consume lots of gas.\\n   * @dev To ensure that it is never called, you may want to add the\\n   * cannotExecute modifier from KeeperBase to your implementation of this\\n   * method.\\n   * @param checkData specified in the upkeep registration so it is always the\\n   * same for a registered upkeep. This can easily be broken down into specific\\n   * arguments using `abi.decode`, so multiple upkeeps can be registered on the\\n   * same contract and easily differentiated by the contract.\\n   * @return upkeepNeeded boolean to indicate whether the keeper should call\\n   * performUpkeep or not.\\n   * @return performData bytes that the keeper should call performUpkeep with, if\\n   * upkeep is needed. If you would like to encode data to decode later, try\\n   * `abi.encode`.\\n   */\\n  function checkUpkeep(bytes calldata checkData) external returns (bool upkeepNeeded, bytes memory performData);\\n\\n  /**\\n   * @notice method that is actually executed by the keepers, via the registry.\\n   * The data returned by the checkUpkeep simulation will be passed into\\n   * this method to actually be executed.\\n   * @dev The input to this method should not be trusted, and the caller of the\\n   * method should not even be restricted to any single registry. Anyone should\\n   * be able call it, and the input should be validated, there is no guarantee\\n   * that the data passed in is the performData returned from checkUpkeep. This\\n   * could happen due to malicious keepers, racing keepers, or simply a state\\n   * change while the performUpkeep transaction is waiting for confirmation.\\n   * Always validate the data passed in.\\n   * @param performData is the data which was passed back from the checkData\\n   * simulation. If it is encoded, it can easily be decoded into other types by\\n   * calling `abi.decode`. This data should not be trusted, and should be\\n   * validated against the contract's current state.\\n   */\\n  function performUpkeep(bytes calldata performData) external;\\n}\",\"keccak256\":\"0x9ffdd3353be8a612bd95f5ffb8dcab21d0eef54e3c6b4c0638e0d309502a2746\",\"license\":\"MIT\"},\"contracts/dependencies/openzeppelin/AccessControl.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.8.17;\\n\\nimport './IAccessControl.sol';\\nimport './Context.sol';\\nimport './Strings.sol';\\nimport './ERC165.sol';\\n\\n/**\\n * @dev Contract module that allows children to implement role-based access\\n * control mechanisms. This is a lightweight version that doesn't allow enumerating role\\n * members except through off-chain means by accessing the contract event logs. Some\\n * applications may benefit from on-chain enumerability, for those cases see\\n * {AccessControlEnumerable}.\\n *\\n * Roles are referred to by their `bytes32` identifier. These should be exposed\\n * in the external API and be unique. The best way to achieve this is by\\n * using `public constant` hash digests:\\n *\\n * ```\\n * bytes32 public constant MY_ROLE = keccak256(\\\"MY_ROLE\\\");\\n * ```\\n *\\n * Roles can be used to represent a set of permissions. To restrict access to a\\n * function call, use {hasRole}:\\n *\\n * ```\\n * function foo() public {\\n *     require(hasRole(MY_ROLE, msg.sender));\\n *     ...\\n * }\\n * ```\\n *\\n * Roles can be granted and revoked dynamically via the {grantRole} and\\n * {revokeRole} functions. Each role has an associated admin role, and only\\n * accounts that have a role's admin role can call {grantRole} and {revokeRole}.\\n *\\n * By default, the admin role for all roles is `DEFAULT_ADMIN_ROLE`, which means\\n * that only accounts with this role will be able to grant or revoke other\\n * roles. More complex role relationships can be created by using\\n * {_setRoleAdmin}.\\n *\\n * WARNING: The `DEFAULT_ADMIN_ROLE` is also its own admin: it has permission to\\n * grant and revoke this role. Extra precautions should be taken to secure\\n * accounts that have been granted it.\\n */\\nabstract contract AccessControl is Context, IAccessControl, ERC165 {\\n  struct RoleData {\\n    mapping(address => bool) members;\\n    bytes32 adminRole;\\n  }\\n\\n  mapping(bytes32 => RoleData) private _roles;\\n\\n  bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;\\n\\n  /**\\n   * @dev Modifier that checks that an account has a specific role. Reverts\\n   * with a standardized message including the required role.\\n   *\\n   * The format of the revert reason is given by the following regular expression:\\n   *\\n   *  /^AccessControl: account (0x[0-9a-f]{40}) is missing role (0x[0-9a-f]{64})$/\\n   *\\n   * _Available since v4.1._\\n   */\\n  modifier onlyRole(bytes32 role) {\\n    _checkRole(role);\\n    _;\\n  }\\n\\n  /**\\n   * @dev See {IERC165-supportsInterface}.\\n   */\\n  function supportsInterface(bytes4 interfaceId) public virtual override view returns (bool) {\\n    return interfaceId == type(IAccessControl).interfaceId || super.supportsInterface(interfaceId);\\n  }\\n\\n  /**\\n   * @dev Returns `true` if `account` has been granted `role`.\\n   */\\n  function hasRole(bytes32 role, address account) public virtual override view returns (bool) {\\n    return _roles[role].members[account];\\n  }\\n\\n  /**\\n   * @dev Revert with a standard message if `_msgSender()` is missing `role`.\\n   * Overriding this function changes the behavior of the {onlyRole} modifier.\\n   *\\n   * Format of the revert message is described in {_checkRole}.\\n   *\\n   * _Available since v4.6._\\n   */\\n  function _checkRole(bytes32 role) internal virtual view {\\n    _checkRole(role, _msgSender());\\n  }\\n\\n  /**\\n   * @dev Revert with a standard message if `account` is missing `role`.\\n   *\\n   * The format of the revert reason is given by the following regular expression:\\n   *\\n   *  /^AccessControl: account (0x[0-9a-f]{40}) is missing role (0x[0-9a-f]{64})$/\\n   */\\n  function _checkRole(bytes32 role, address account) internal virtual view {\\n    if (!hasRole(role, account)) {\\n      revert(\\n        string(\\n          abi.encodePacked(\\n            'AccessControl: account ',\\n            Strings.toHexString(account),\\n            ' is missing role ',\\n            Strings.toHexString(uint256(role), 32)\\n          )\\n        )\\n      );\\n    }\\n  }\\n\\n  /**\\n   * @dev Returns the admin role that controls `role`. See {grantRole} and\\n   * {revokeRole}.\\n   *\\n   * To change a role's admin, use {_setRoleAdmin}.\\n   */\\n  function getRoleAdmin(bytes32 role) public virtual override view returns (bytes32) {\\n    return _roles[role].adminRole;\\n  }\\n\\n  /**\\n   * @dev Grants `role` to `account`.\\n   *\\n   * If `account` had not been already granted `role`, emits a {RoleGranted}\\n   * event.\\n   *\\n   * Requirements:\\n   *\\n   * - the caller must have ``role``'s admin role.\\n   *\\n   * May emit a {RoleGranted} event.\\n   */\\n  function grantRole(bytes32 role, address account)\\n    public\\n    virtual\\n    override\\n    onlyRole(getRoleAdmin(role))\\n  {\\n    _grantRole(role, account);\\n  }\\n\\n  /**\\n   * @dev Revokes `role` from `account`.\\n   *\\n   * If `account` had been granted `role`, emits a {RoleRevoked} event.\\n   *\\n   * Requirements:\\n   *\\n   * - the caller must have ``role``'s admin role.\\n   *\\n   * May emit a {RoleRevoked} event.\\n   */\\n  function revokeRole(bytes32 role, address account)\\n    public\\n    virtual\\n    override\\n    onlyRole(getRoleAdmin(role))\\n  {\\n    _revokeRole(role, account);\\n  }\\n\\n  /**\\n   * @dev Revokes `role` from the calling account.\\n   *\\n   * Roles are often managed via {grantRole} and {revokeRole}: this function's\\n   * purpose is to provide a mechanism for accounts to lose their privileges\\n   * if they are compromised (such as when a trusted device is misplaced).\\n   *\\n   * If the calling account had been revoked `role`, emits a {RoleRevoked}\\n   * event.\\n   *\\n   * Requirements:\\n   *\\n   * - the caller must be `account`.\\n   *\\n   * May emit a {RoleRevoked} event.\\n   */\\n  function renounceRole(bytes32 role, address account) public virtual override {\\n    require(account == _msgSender(), 'AccessControl: can only renounce roles for self');\\n\\n    _revokeRole(role, account);\\n  }\\n\\n  /**\\n   * @dev Grants `role` to `account`.\\n   *\\n   * If `account` had not been already granted `role`, emits a {RoleGranted}\\n   * event. Note that unlike {grantRole}, this function doesn't perform any\\n   * checks on the calling account.\\n   *\\n   * May emit a {RoleGranted} event.\\n   *\\n   * [WARNING]\\n   * ====\\n   * This function should only be called from the constructor when setting\\n   * up the initial roles for the system.\\n   *\\n   * Using this function in any other way is effectively circumventing the admin\\n   * system imposed by {AccessControl}.\\n   * ====\\n   *\\n   * NOTE: This function is deprecated in favor of {_grantRole}.\\n   */\\n  function _setupRole(bytes32 role, address account) internal virtual {\\n    _grantRole(role, account);\\n  }\\n\\n  /**\\n   * @dev Sets `adminRole` as ``role``'s admin role.\\n   *\\n   * Emits a {RoleAdminChanged} event.\\n   */\\n  function _setRoleAdmin(bytes32 role, bytes32 adminRole) internal virtual {\\n    bytes32 previousAdminRole = getRoleAdmin(role);\\n    _roles[role].adminRole = adminRole;\\n    emit RoleAdminChanged(role, previousAdminRole, adminRole);\\n  }\\n\\n  /**\\n   * @dev Grants `role` to `account`.\\n   *\\n   * Internal function without access restriction.\\n   *\\n   * May emit a {RoleGranted} event.\\n   */\\n  function _grantRole(bytes32 role, address account) internal virtual {\\n    if (!hasRole(role, account)) {\\n      _roles[role].members[account] = true;\\n      emit RoleGranted(role, account, _msgSender());\\n    }\\n  }\\n\\n  /**\\n   * @dev Revokes `role` from `account`.\\n   *\\n   * Internal function without access restriction.\\n   *\\n   * May emit a {RoleRevoked} event.\\n   */\\n  function _revokeRole(bytes32 role, address account) internal virtual {\\n    if (hasRole(role, account)) {\\n      _roles[role].members[account] = false;\\n      emit RoleRevoked(role, account, _msgSender());\\n    }\\n  }\\n}\\n\",\"keccak256\":\"0xa044caade5c3d5655b324d3cd26d6f96d94f234792693332f4db6912c7faf0c3\",\"license\":\"MIT\"},\"contracts/dependencies/openzeppelin/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts v4.4.1 (utils/Context.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n}\",\"keccak256\":\"0x2d9821ede311a3c16183811be8bdc666e88c69d9d50321e3dff025fe7630d373\",\"license\":\"MIT\"},\"contracts/dependencies/openzeppelin/ERC165.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.8.17;\\n\\nimport './IERC165.sol';\\n\\n/**\\n * @dev Implementation of the {IERC165} interface.\\n *\\n * Contracts that want to implement ERC165 should inherit from this contract and override {supportsInterface} to check\\n * for the additional interface id that will be supported. For example:\\n *\\n * ```solidity\\n * function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {\\n *     return interfaceId == type(MyInterface).interfaceId || super.supportsInterface(interfaceId);\\n * }\\n * ```\\n *\\n * Alternatively, {ERC165Storage} provides an easier to use but more expensive implementation.\\n */\\nabstract contract ERC165 is IERC165 {\\n  /**\\n   * @dev See {IERC165-supportsInterface}.\\n   */\\n  function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {\\n    return interfaceId == type(IERC165).interfaceId;\\n  }\\n}\\n\",\"keccak256\":\"0xab40d2f6f7200a44c41bd55e63c39a16e84afc4a77fae1d9ecd3c04a2f86013c\",\"license\":\"MIT\"},\"contracts/dependencies/openzeppelin/IAccessControl.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.8.17;\\n\\n/**\\n * @dev External interface of AccessControl declared to support ERC165 detection.\\n */\\ninterface IAccessControl {\\n  /**\\n   * @dev Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole`\\n   *\\n   * `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite\\n   * {RoleAdminChanged} not being emitted signaling this.\\n   *\\n   * _Available since v3.1._\\n   */\\n  event RoleAdminChanged(\\n    bytes32 indexed role,\\n    bytes32 indexed previousAdminRole,\\n    bytes32 indexed newAdminRole\\n  );\\n\\n  /**\\n   * @dev Emitted when `account` is granted `role`.\\n   *\\n   * `sender` is the account that originated the contract call, an admin role\\n   * bearer except when using {AccessControl-_setupRole}.\\n   */\\n  event RoleGranted(bytes32 indexed role, address indexed account, address indexed sender);\\n\\n  /**\\n   * @dev Emitted when `account` is revoked `role`.\\n   *\\n   * `sender` is the account that originated the contract call:\\n   *   - if using `revokeRole`, it is the admin role bearer\\n   *   - if using `renounceRole`, it is the role bearer (i.e. `account`)\\n   */\\n  event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender);\\n\\n  /**\\n   * @dev Returns `true` if `account` has been granted `role`.\\n   */\\n  function hasRole(bytes32 role, address account) external view returns (bool);\\n\\n  /**\\n   * @dev Returns the admin role that controls `role`. See {grantRole} and\\n   * {revokeRole}.\\n   *\\n   * To change a role's admin, use {AccessControl-_setRoleAdmin}.\\n   */\\n  function getRoleAdmin(bytes32 role) external view returns (bytes32);\\n\\n  /**\\n   * @dev Grants `role` to `account`.\\n   *\\n   * If `account` had not been already granted `role`, emits a {RoleGranted}\\n   * event.\\n   *\\n   * Requirements:\\n   *\\n   * - the caller must have ``role``'s admin role.\\n   */\\n  function grantRole(bytes32 role, address account) external;\\n\\n  /**\\n   * @dev Revokes `role` from `account`.\\n   *\\n   * If `account` had been granted `role`, emits a {RoleRevoked} event.\\n   *\\n   * Requirements:\\n   *\\n   * - the caller must have ``role``'s admin role.\\n   */\\n  function revokeRole(bytes32 role, address account) external;\\n\\n  /**\\n   * @dev Revokes `role` from the calling account.\\n   *\\n   * Roles are often managed via {grantRole} and {revokeRole}: this function's\\n   * purpose is to provide a mechanism for accounts to lose their privileges\\n   * if they are compromised (such as when a trusted device is misplaced).\\n   *\\n   * If the calling account had been granted `role`, emits a {RoleRevoked}\\n   * event.\\n   *\\n   * Requirements:\\n   *\\n   * - the caller must be `account`.\\n   */\\n  function renounceRole(bytes32 role, address account) external;\\n}\\n\",\"keccak256\":\"0x997a73b9665f991775cc4eb1ab4745665e8f3ff9ddf67f74af24f7c315d5ee47\",\"license\":\"MIT\"},\"contracts/dependencies/openzeppelin/IERC165.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.8.17;\\n\\n/**\\n * @dev Interface of the ERC165 standard, as defined in the\\n * https://eips.ethereum.org/EIPS/eip-165[EIP].\\n *\\n * Implementers can declare support of contract interfaces, which can then be\\n * queried by others ({ERC165Checker}).\\n *\\n * For an implementation, see {ERC165}.\\n */\\ninterface IERC165 {\\n  /**\\n   * @dev Returns true if this contract implements the interface defined by\\n   * `interfaceId`. See the corresponding\\n   * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]\\n   * to learn more about how these ids are created.\\n   *\\n   * This function call must use less than 30 000 gas.\\n   */\\n  function supportsInterface(bytes4 interfaceId) external view returns (bool);\\n}\\n\",\"keccak256\":\"0xaeca7db2074d7c66a20c609539e1f1656e67f6981bf01f83ad6aa8aa140c8d2e\",\"license\":\"MIT\"},\"contracts/dependencies/openzeppelin/Math.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.8.0) (utils/math/Math.sol)\\n\\npragma solidity 0.8.17;\\n\\n/**\\n * @dev Standard math utilities missing in the Solidity language.\\n */\\nlibrary Math {\\n    enum Rounding {\\n        Down, // Toward negative infinity\\n        Up, // Toward infinity\\n        Zero // Toward zero\\n    }\\n\\n    /**\\n     * @dev Returns the largest of two numbers.\\n     */\\n    function max(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a > b ? a : b;\\n    }\\n\\n    /**\\n     * @dev Returns the smallest of two numbers.\\n     */\\n    function min(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return a < b ? a : b;\\n    }\\n\\n    /**\\n     * @dev Returns the average of two numbers. The result is rounded towards\\n     * zero.\\n     */\\n    function average(uint256 a, uint256 b) internal pure returns (uint256) {\\n        // (a + b) / 2 can overflow.\\n        return (a & b) + (a ^ b) / 2;\\n    }\\n\\n    /**\\n     * @dev Returns the ceiling of the division of two numbers.\\n     *\\n     * This differs from standard division with `/` in that it rounds up instead\\n     * of rounding down.\\n     */\\n    function ceilDiv(uint256 a, uint256 b) internal pure returns (uint256) {\\n        // (a + b - 1) / b can overflow on addition, so we distribute.\\n        return a == 0 ? 0 : (a - 1) / b + 1;\\n    }\\n\\n    /**\\n     * @notice Calculates floor(x * y / denominator) with full precision. Throws if result overflows a uint256 or denominator == 0\\n     * @dev Original credit to Remco Bloemen under MIT license (https://xn--2-umb.com/21/muldiv)\\n     * with further edits by Uniswap Labs also under MIT license.\\n     */\\n    function mulDiv(\\n        uint256 x,\\n        uint256 y,\\n        uint256 denominator\\n    ) internal pure returns (uint256 result) {\\n        unchecked {\\n            // 512-bit multiply [prod1 prod0] = x * y. Compute the product mod 2^256 and mod 2^256 - 1, then use\\n            // use the Chinese Remainder Theorem to reconstruct the 512 bit result. The result is stored in two 256\\n            // variables such that product = prod1 * 2^256 + prod0.\\n            uint256 prod0; // Least significant 256 bits of the product\\n            uint256 prod1; // Most significant 256 bits of the product\\n            assembly {\\n                let mm := mulmod(x, y, not(0))\\n                prod0 := mul(x, y)\\n                prod1 := sub(sub(mm, prod0), lt(mm, prod0))\\n            }\\n\\n            // Handle non-overflow cases, 256 by 256 division.\\n            if (prod1 == 0) {\\n                return prod0 / denominator;\\n            }\\n\\n            // Make sure the result is less than 2^256. Also prevents denominator == 0.\\n            require(denominator > prod1);\\n\\n            ///////////////////////////////////////////////\\n            // 512 by 256 division.\\n            ///////////////////////////////////////////////\\n\\n            // Make division exact by subtracting the remainder from [prod1 prod0].\\n            uint256 remainder;\\n            assembly {\\n                // Compute remainder using mulmod.\\n                remainder := mulmod(x, y, denominator)\\n\\n                // Subtract 256 bit number from 512 bit number.\\n                prod1 := sub(prod1, gt(remainder, prod0))\\n                prod0 := sub(prod0, remainder)\\n            }\\n\\n            // Factor powers of two out of denominator and compute largest power of two divisor of denominator. Always >= 1.\\n            // See https://cs.stackexchange.com/q/138556/92363.\\n\\n            // Does not overflow because the denominator cannot be zero at this stage in the function.\\n            uint256 twos = denominator & (~denominator + 1);\\n            assembly {\\n                // Divide denominator by twos.\\n                denominator := div(denominator, twos)\\n\\n                // Divide [prod1 prod0] by twos.\\n                prod0 := div(prod0, twos)\\n\\n                // Flip twos such that it is 2^256 / twos. If twos is zero, then it becomes one.\\n                twos := add(div(sub(0, twos), twos), 1)\\n            }\\n\\n            // Shift in bits from prod1 into prod0.\\n            prod0 |= prod1 * twos;\\n\\n            // Invert denominator mod 2^256. Now that denominator is an odd number, it has an inverse modulo 2^256 such\\n            // that denominator * inv = 1 mod 2^256. Compute the inverse by starting with a seed that is correct for\\n            // four bits. That is, denominator * inv = 1 mod 2^4.\\n            uint256 inverse = (3 * denominator) ^ 2;\\n\\n            // Use the Newton-Raphson iteration to improve the precision. Thanks to Hensel's lifting lemma, this also works\\n            // in modular arithmetic, doubling the correct bits in each step.\\n            inverse *= 2 - denominator * inverse; // inverse mod 2^8\\n            inverse *= 2 - denominator * inverse; // inverse mod 2^16\\n            inverse *= 2 - denominator * inverse; // inverse mod 2^32\\n            inverse *= 2 - denominator * inverse; // inverse mod 2^64\\n            inverse *= 2 - denominator * inverse; // inverse mod 2^128\\n            inverse *= 2 - denominator * inverse; // inverse mod 2^256\\n\\n            // Because the division is now exact we can divide by multiplying with the modular inverse of denominator.\\n            // This will give us the correct result modulo 2^256. Since the preconditions guarantee that the outcome is\\n            // less than 2^256, this is the final result. We don't need to compute the high bits of the result and prod1\\n            // is no longer required.\\n            result = prod0 * inverse;\\n            return result;\\n        }\\n    }\\n\\n    /**\\n     * @notice Calculates x * y / denominator with full precision, following the selected rounding direction.\\n     */\\n    function mulDiv(\\n        uint256 x,\\n        uint256 y,\\n        uint256 denominator,\\n        Rounding rounding\\n    ) internal pure returns (uint256) {\\n        uint256 result = mulDiv(x, y, denominator);\\n        if (rounding == Rounding.Up && mulmod(x, y, denominator) > 0) {\\n            result += 1;\\n        }\\n        return result;\\n    }\\n\\n    /**\\n     * @dev Returns the square root of a number. If the number is not a perfect square, the value is rounded down.\\n     *\\n     * Inspired by Henry S. Warren, Jr.'s \\\"Hacker's Delight\\\" (Chapter 11).\\n     */\\n    function sqrt(uint256 a) internal pure returns (uint256) {\\n        if (a == 0) {\\n            return 0;\\n        }\\n\\n        // For our first guess, we get the biggest power of 2 which is smaller than the square root of the target.\\n        //\\n        // We know that the \\\"msb\\\" (most significant bit) of our target number `a` is a power of 2 such that we have\\n        // `msb(a) <= a < 2*msb(a)`. This value can be written `msb(a)=2**k` with `k=log2(a)`.\\n        //\\n        // This can be rewritten `2**log2(a) <= a < 2**(log2(a) + 1)`\\n        // \\u2192 `sqrt(2**k) <= sqrt(a) < sqrt(2**(k+1))`\\n        // \\u2192 `2**(k/2) <= sqrt(a) < 2**((k+1)/2) <= 2**(k/2 + 1)`\\n        //\\n        // Consequently, `2**(log2(a) / 2)` is a good first approximation of `sqrt(a)` with at least 1 correct bit.\\n        uint256 result = 1 << (log2(a) >> 1);\\n\\n        // At this point `result` is an estimation with one bit of precision. We know the true value is a uint128,\\n        // since it is the square root of a uint256. Newton's method converges quadratically (precision doubles at\\n        // every iteration). We thus need at most 7 iteration to turn our partial result with one bit of precision\\n        // into the expected uint128 result.\\n        unchecked {\\n            result = (result + a / result) >> 1;\\n            result = (result + a / result) >> 1;\\n            result = (result + a / result) >> 1;\\n            result = (result + a / result) >> 1;\\n            result = (result + a / result) >> 1;\\n            result = (result + a / result) >> 1;\\n            result = (result + a / result) >> 1;\\n            return min(result, a / result);\\n        }\\n    }\\n\\n    /**\\n     * @notice Calculates sqrt(a), following the selected rounding direction.\\n     */\\n    function sqrt(uint256 a, Rounding rounding) internal pure returns (uint256) {\\n        unchecked {\\n            uint256 result = sqrt(a);\\n            return result + (rounding == Rounding.Up && result * result < a ? 1 : 0);\\n        }\\n    }\\n\\n    /**\\n     * @dev Return the log in base 2, rounded down, of a positive value.\\n     * Returns 0 if given 0.\\n     */\\n    function log2(uint256 value) internal pure returns (uint256) {\\n        uint256 result = 0;\\n        unchecked {\\n            if (value >> 128 > 0) {\\n                value >>= 128;\\n                result += 128;\\n            }\\n            if (value >> 64 > 0) {\\n                value >>= 64;\\n                result += 64;\\n            }\\n            if (value >> 32 > 0) {\\n                value >>= 32;\\n                result += 32;\\n            }\\n            if (value >> 16 > 0) {\\n                value >>= 16;\\n                result += 16;\\n            }\\n            if (value >> 8 > 0) {\\n                value >>= 8;\\n                result += 8;\\n            }\\n            if (value >> 4 > 0) {\\n                value >>= 4;\\n                result += 4;\\n            }\\n            if (value >> 2 > 0) {\\n                value >>= 2;\\n                result += 2;\\n            }\\n            if (value >> 1 > 0) {\\n                result += 1;\\n            }\\n        }\\n        return result;\\n    }\\n\\n    /**\\n     * @dev Return the log in base 2, following the selected rounding direction, of a positive value.\\n     * Returns 0 if given 0.\\n     */\\n    function log2(uint256 value, Rounding rounding) internal pure returns (uint256) {\\n        unchecked {\\n            uint256 result = log2(value);\\n            return result + (rounding == Rounding.Up && 1 << result < value ? 1 : 0);\\n        }\\n    }\\n\\n    /**\\n     * @dev Return the log in base 10, rounded down, of a positive value.\\n     * Returns 0 if given 0.\\n     */\\n    function log10(uint256 value) internal pure returns (uint256) {\\n        uint256 result = 0;\\n        unchecked {\\n            if (value >= 10**64) {\\n                value /= 10**64;\\n                result += 64;\\n            }\\n            if (value >= 10**32) {\\n                value /= 10**32;\\n                result += 32;\\n            }\\n            if (value >= 10**16) {\\n                value /= 10**16;\\n                result += 16;\\n            }\\n            if (value >= 10**8) {\\n                value /= 10**8;\\n                result += 8;\\n            }\\n            if (value >= 10**4) {\\n                value /= 10**4;\\n                result += 4;\\n            }\\n            if (value >= 10**2) {\\n                value /= 10**2;\\n                result += 2;\\n            }\\n            if (value >= 10**1) {\\n                result += 1;\\n            }\\n        }\\n        return result;\\n    }\\n\\n    /**\\n     * @dev Return the log in base 10, following the selected rounding direction, of a positive value.\\n     * Returns 0 if given 0.\\n     */\\n    function log10(uint256 value, Rounding rounding) internal pure returns (uint256) {\\n        unchecked {\\n            uint256 result = log10(value);\\n            return result + (rounding == Rounding.Up && 10**result < value ? 1 : 0);\\n        }\\n    }\\n\\n    /**\\n     * @dev Return the log in base 256, rounded down, of a positive value.\\n     * Returns 0 if given 0.\\n     *\\n     * Adding one to the result gives the number of pairs of hex symbols needed to represent `value` as a hex string.\\n     */\\n    function log256(uint256 value) internal pure returns (uint256) {\\n        uint256 result = 0;\\n        unchecked {\\n            if (value >> 128 > 0) {\\n                value >>= 128;\\n                result += 16;\\n            }\\n            if (value >> 64 > 0) {\\n                value >>= 64;\\n                result += 8;\\n            }\\n            if (value >> 32 > 0) {\\n                value >>= 32;\\n                result += 4;\\n            }\\n            if (value >> 16 > 0) {\\n                value >>= 16;\\n                result += 2;\\n            }\\n            if (value >> 8 > 0) {\\n                result += 1;\\n            }\\n        }\\n        return result;\\n    }\\n\\n    /**\\n     * @dev Return the log in base 10, following the selected rounding direction, of a positive value.\\n     * Returns 0 if given 0.\\n     */\\n    function log256(uint256 value, Rounding rounding) internal pure returns (uint256) {\\n        unchecked {\\n            uint256 result = log256(value);\\n            return result + (rounding == Rounding.Up && 1 << (result * 8) < value ? 1 : 0);\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0xc26ff3a051d531ade6d9683c86c923b988eb921067c4673feaa98a7ea899af10\",\"license\":\"MIT\"},\"contracts/dependencies/openzeppelin/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.7.0) (access/Ownable.sol)\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"./Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * By default, the owner account will be the one that deploys the contract. This\\n * can later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the deployer as the initial owner.\\n     */\\n    constructor() {\\n        _transferOwnership(_msgSender());\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        _checkOwner();\\n        _;\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if the sender is not the owner.\\n     */\\n    function _checkOwner() internal view virtual {\\n        require(owner() == _msgSender(), \\\"Ownable: caller is not the owner\\\");\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions anymore. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby removing any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _transferOwnership(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        require(newOwner != address(0), \\\"Ownable: new owner is the zero address\\\");\\n        _transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0x8c163fb0fb6e09d4ece34ede2d749086faeaa8438c07cf5529e5fbca680043e2\",\"license\":\"MIT\"},\"contracts/dependencies/openzeppelin/Ownable2Step.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.9.0) (access/Ownable2Step.sol)\\n\\npragma solidity ^0.8.17;\\n\\nimport \\\"./Ownable.sol\\\";\\n\\n/**\\n * @dev Contract module which provides access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * By default, the owner account will be the one that deploys the contract. This\\n * can later be changed with {transferOwnership} and {acceptOwnership}.\\n *\\n * This module is used through inheritance. It will make available all functions\\n * from parent (Ownable).\\n */\\nabstract contract Ownable2Step is Ownable {\\n    address private _pendingOwner;\\n\\n    event OwnershipTransferStarted(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Returns the address of the pending owner.\\n     */\\n    function pendingOwner() public view virtual returns (address) {\\n        return _pendingOwner;\\n    }\\n\\n    /**\\n     * @dev Starts the ownership transfer of the contract to a new account. Replaces the pending transfer if there is one.\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual override onlyOwner {\\n        _pendingOwner = newOwner;\\n        emit OwnershipTransferStarted(owner(), newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`) and deletes any pending owner.\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual override {\\n        delete _pendingOwner;\\n        super._transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev The new owner accepts the ownership transfer.\\n     */\\n    function acceptOwnership() public virtual {\\n        address sender = _msgSender();\\n        require(pendingOwner() == sender, \\\"Ownable2Step: caller is not the new owner\\\");\\n        _transferOwnership(sender);\\n    }\\n}\",\"keccak256\":\"0xdd3ad82c176f6e26688a509bb4aee58837188777f2f357818c185c03806e2f2d\",\"license\":\"MIT\"},\"contracts/dependencies/openzeppelin/Strings.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.8.17;\\n\\nimport \\\"./Math.sol\\\";\\n\\n/**\\n * @dev String operations.\\n */\\nlibrary Strings {\\n    bytes16 private constant _SYMBOLS = \\\"0123456789abcdef\\\";\\n    uint8 private constant _ADDRESS_LENGTH = 20;\\n\\n    /**\\n     * @dev Converts a `uint256` to its ASCII `string` decimal representation.\\n     */\\n    function toString(uint256 value) internal pure returns (string memory) {\\n        unchecked {\\n            uint256 length = Math.log10(value) + 1;\\n            string memory buffer = new string(length);\\n            uint256 ptr;\\n            /// @solidity memory-safe-assembly\\n            assembly {\\n                ptr := add(buffer, add(32, length))\\n            }\\n            while (true) {\\n                ptr--;\\n                /// @solidity memory-safe-assembly\\n                assembly {\\n                    mstore8(ptr, byte(mod(value, 10), _SYMBOLS))\\n                }\\n                value /= 10;\\n                if (value == 0) break;\\n            }\\n            return buffer;\\n        }\\n    }\\n\\n    /**\\n     * @dev Converts a `uint256` to its ASCII `string` hexadecimal representation.\\n     */\\n    function toHexString(uint256 value) internal pure returns (string memory) {\\n        unchecked {\\n            return toHexString(value, Math.log256(value) + 1);\\n        }\\n    }\\n\\n    /**\\n     * @dev Converts a `uint256` to its ASCII `string` hexadecimal representation with fixed length.\\n     */\\n    function toHexString(uint256 value, uint256 length) internal pure returns (string memory) {\\n        bytes memory buffer = new bytes(2 * length + 2);\\n        buffer[0] = \\\"0\\\";\\n        buffer[1] = \\\"x\\\";\\n        for (uint256 i = 2 * length + 1; i > 1; --i) {\\n            buffer[i] = _SYMBOLS[value & 0xf];\\n            value >>= 4;\\n        }\\n        require(value == 0, \\\"Strings: hex length insufficient\\\");\\n        return string(buffer);\\n    }\\n\\n    /**\\n     * @dev Converts an `address` with fixed length of 20 bytes to its not checksummed ASCII `string` hexadecimal representation.\\n     */\\n    function toHexString(address addr) internal pure returns (string memory) {\\n        return toHexString(uint256(uint160(addr)), _ADDRESS_LENGTH);\\n    }\\n}\\n\",\"keccak256\":\"0x11c1e5f88fcec4af2f1ef04ae9940ec3b46e6db0784dba442abdd92d3324ba92\",\"license\":\"MIT\"},\"contracts/interfaces/IHOPEPriceFeed.sol\":{\"content\":\"// SPDX-License-Identifier: GPL-3.0\\npragma solidity 0.8.17;\\n\\ninterface IHOPEPriceFeed {\\n    function latestAnswer() external view returns (uint256);\\n}\",\"keccak256\":\"0x3ef48a747dd7b4e4b2dcea39bb1df8e945b5b19fde40b4fac02ba00ff786b1dc\",\"license\":\"GPL-3.0\"},\"contracts/interfaces/IHopeAggregator.sol\":{\"content\":\"// SPDX-License-Identifier: GPL-3.0\\npragma solidity 0.8.17;\\n\\nimport {AggregatorV2V3Interface} from '../dependencies/chainlink/AggregatorV2V3Interface.sol';\\n\\ninterface IHopeAggregator is AggregatorV2V3Interface{\\n    function transmit(uint256 _answer) external;\\n}\",\"keccak256\":\"0x25b2118fee6bd06c902faf471c7902adf3a5f0bd91f77edb7e8debf6df9590b0\",\"license\":\"GPL-3.0\"},\"contracts/libraries/Errors.sol\":{\"content\":\"// SPDX-License-Identifier: LGPL-3.0\\npragma solidity 0.8.17;\\n\\n/**\\n * @title Errors library\\n * @author HopeLend\\n * @notice Defines the error messages emitted by the different contracts of the HopeLend protocol\\n */\\nlibrary Errors {\\n  string public constant CALLER_NOT_ASSET_LISTING_OR_POOL_ADMIN = '5'; // 'The caller of the function is not an asset listing or pool admin'\\n  string public constant INCONSISTENT_PARAMS_LENGTH = '76'; // 'Array parameters that should be equal length are not'\\n  string public constant ZERO_ADDRESS_NOT_VALID = '77'; // 'Zero address not valid'\\n  string public constant FAILOVER_ALREADY_ACTIVE = '92'; // Failover is already active\\n  string public constant FAILOVER_ALREADY_DEACTIVATED = '93'; // Failover is already deactivated\\n}\\n\",\"keccak256\":\"0xa67539ec1ef816afaa33b8f40d481c5993119ce8ec8b5082dd2bda46c89b5398\",\"license\":\"LGPL-3.0\"}},\"version\":1}",
+  "bytecode": "0x60806040523480156200001157600080fd5b5060405162001b1838038062001b1883398101604081905262000034916200021c565b6200003f3362000075565b6200004a846200009f565b6200005583620000f4565b620000608262000143565b6200006b8162000179565b5050505062000264565b600180546001600160a01b03191690556200009c81620001af602090811b62000b8b17901c565b50565b600380546001600160a01b0319166001600160a01b0383169081179091556040519081527f81d6cafd5ac0f5622e7437d9f7944c09c8da68fa4749117f58310f76e1aa96b8906020015b60405180910390a150565b600480546001600160a01b0319166001600160a01b0383169081179091556040519081527f602cec4b1583b07d071161da5eb9589444d2459201e2fab7753dc941e9351c2190602001620000e9565b60058190556040518181527fc2178046992f7ede7649071430a5471a38fa34dc920c308b50d50c3271519b6d90602001620000e9565b60068190556040518181527ffc6a7902b31c6ecdb0c5861232c559ad5a0836a4afdfd978472718132e48778190602001620000e9565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b80516001600160a01b03811681146200021757600080fd5b919050565b600080600080608085870312156200023357600080fd5b6200023e85620001ff565b93506200024e60208601620001ff565b6040860151606090960151949790965092505050565b6118a480620002746000396000f3fe608060405234801561001057600080fd5b50600436106101c45760003560e01c8063741bef1a116100f9578063d29dba9111610097578063e30c397811610071578063e30c397814610408578063f2fde38b14610426578063f5b541a614610439578063f9120af61461046057600080fd5b8063d29dba91146103d9578063d547741f146103ec578063d94ad837146103ff57600080fd5b806391d14854116100d357806391d14854146103655780639870d7fe146103ab578063a217fddf146103be578063ac8a584a146103c657600080fd5b8063741bef1a1461031f57806379ba50971461033f5780638da5cb5b1461034757600080fd5b806336568abe1161016657806353a15edc1161014057806353a15edc146102d05780636d70f7ae146102e35780636e04ff0d146102f6578063715018a61461031757600080fd5b806336568abe146102a15780633defb962146102b45780634585e33b146102bd57600080fd5b8063245a7bfc116101a2578063245a7bfc14610211578063248a9ca3146102565780632754aae1146102795780632f2ff15d1461028e57600080fd5b806301ffc9a7146101c9578063053f14da146101f157806319d8ac6114610208575b600080fd5b6101dc6101d7366004611409565b610473565b60405190151581526020015b60405180910390f35b6101fa60075481565b6040519081526020016101e8565b6101fa60085481565b6004546102319073ffffffffffffffffffffffffffffffffffffffff1681565b60405173ffffffffffffffffffffffffffffffffffffffff90911681526020016101e8565b6101fa61026436600461144b565b60009081526002602052604090206001015490565b61028c61028736600461148d565b61050c565b005b61028c61029c3660046114a8565b610543565b61028c6102af3660046114a8565b61056d565b6101fa60055481565b61028c6102cb366004611503565b610621565b61028c6102de36600461144b565b610786565b6101dc6102f136600461148d565b6107b9565b6103096103043660046115d2565b610806565b6040516101e89291906116b2565b61028c61081d565b6003546102319073ffffffffffffffffffffffffffffffffffffffff1681565b61028c610831565b60005473ffffffffffffffffffffffffffffffffffffffff16610231565b6101dc6103733660046114a8565b600091825260026020908152604080842073ffffffffffffffffffffffffffffffffffffffff93909316845291905290205460ff1690565b61028c6103b936600461148d565b6108e6565b6101fa600081565b61028c6103d436600461148d565b61099b565b61028c6103e736600461144b565b610a50565b61028c6103fa3660046114a8565b610a83565b6101fa60065481565b60015473ffffffffffffffffffffffffffffffffffffffff16610231565b61028c61043436600461148d565b610aa8565b6101fa7f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b92981565b61028c61046e36600461148d565b610b58565b60007fffffffff0000000000000000000000000000000000000000000000000000000082167f7965db0b00000000000000000000000000000000000000000000000000000000148061050657507f01ffc9a7000000000000000000000000000000000000000000000000000000007fffffffff000000000000000000000000000000000000000000000000000000008316145b92915050565b7f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b92961053681610c00565b61053f82610c0a565b5050565b60008281526002602052604090206001015461055e81610c00565b6105688383610c84565b505050565b73ffffffffffffffffffffffffffffffffffffffff81163314610617576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152602f60248201527f416363657373436f6e74726f6c3a2063616e206f6e6c792072656e6f756e636560448201527f20726f6c657320666f722073656c66000000000000000000000000000000000060648201526084015b60405180910390fd5b61053f8282610d78565b60008061062c610e33565b91509150806106bd576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152602160248201527f486f70654175746f6d6174696f6e3a2075706b656570206e6f74206e6565646560448201527f6400000000000000000000000000000000000000000000000000000000000000606482015260840161060e565b600782905542600855600480546040517f8733544300000000000000000000000000000000000000000000000000000000815291820184905273ffffffffffffffffffffffffffffffffffffffff1690638733544390602401600060405180830381600087803b15801561073057600080fd5b505af1158015610744573d6000803e3d6000fd5b5050604080518581524260208201527f945c1c4e99aa89f648fbfe3df471b916f719e16d960fcec0737d4d56bd696838935001905060405180910390a1505050565b7f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b9296107b081610c00565b61053f82610ebe565b73ffffffffffffffffffffffffffffffffffffffff811660009081527f6bc781d8c7f9885ebbb3cefbc18932c491038e2ae5c5b56447891e0bd98ea163602052604081205460ff16610506565b60006060610812610e33565b959194509092505050565b610825610ef3565b61082f6000610f74565b565b600154339073ffffffffffffffffffffffffffffffffffffffff1681146108da576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152602960248201527f4f776e61626c6532537465703a2063616c6c6572206973206e6f74207468652060448201527f6e6577206f776e65720000000000000000000000000000000000000000000000606482015260840161060e565b6108e381610f74565b50565b6108ee610ef3565b60408051808201909152600281527f3737000000000000000000000000000000000000000000000000000000000000602082015273ffffffffffffffffffffffffffffffffffffffff8216610970576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161060e91906116d5565b506108e37f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b92982610c84565b6109a3610ef3565b60408051808201909152600281527f3737000000000000000000000000000000000000000000000000000000000000602082015273ffffffffffffffffffffffffffffffffffffffff8216610a25576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161060e91906116d5565b506108e37f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b92982610d78565b7f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b929610a7a81610c00565b61053f82610fa5565b600082815260026020526040902060010154610a9e81610c00565b6105688383610d78565b610ab0610ef3565b6001805473ffffffffffffffffffffffffffffffffffffffff83167fffffffffffffffffffffffff00000000000000000000000000000000000000009091168117909155610b1360005473ffffffffffffffffffffffffffffffffffffffff1690565b73ffffffffffffffffffffffffffffffffffffffff167f38d16b8cac22d99fc7c124b9cd0de2d3fa1faef420bfe791d8c362d765e2270060405160405180910390a350565b7f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b929610b8281610c00565b61053f82610fda565b6000805473ffffffffffffffffffffffffffffffffffffffff8381167fffffffffffffffffffffffff0000000000000000000000000000000000000000831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b6108e3813361104d565b600380547fffffffffffffffffffffffff00000000000000000000000000000000000000001673ffffffffffffffffffffffffffffffffffffffff83169081179091556040519081527f81d6cafd5ac0f5622e7437d9f7944c09c8da68fa4749117f58310f76e1aa96b8906020015b60405180910390a150565b600082815260026020908152604080832073ffffffffffffffffffffffffffffffffffffffff8516845290915290205460ff1661053f57600082815260026020908152604080832073ffffffffffffffffffffffffffffffffffffffff85168452909152902080547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00166001179055610d1a3390565b73ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff16837f2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d60405160405180910390a45050565b600082815260026020908152604080832073ffffffffffffffffffffffffffffffffffffffff8516845290915290205460ff161561053f57600082815260026020908152604080832073ffffffffffffffffffffffffffffffffffffffff8516808552925280832080547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0016905551339285917ff6391f5c32d9c69d2a47ea670b442974b53935d1edc7fd64eb21e047a839171b9190a45050565b600080610e3e611107565b91506000821190506000818015610e5b5750600554600854420310155b91506007548310610e8c576127106007546006540281610e7d57610e7d6116e8565b04600754840310159050610eae565b6127106007546006540281610ea357610ea36116e8565b048360075403101590505b8180610eb75750805b9150509091565b60068190556040518181527ffc6a7902b31c6ecdb0c5861232c559ad5a0836a4afdfd978472718132e48778190602001610c79565b60005473ffffffffffffffffffffffffffffffffffffffff16331461082f576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015260640161060e565b600180547fffffffffffffffffffffffff00000000000000000000000000000000000000001690556108e381610b8b565b60058190556040518181527fc2178046992f7ede7649071430a5471a38fa34dc920c308b50d50c3271519b6d90602001610c79565b600480547fffffffffffffffffffffffff00000000000000000000000000000000000000001673ffffffffffffffffffffffffffffffffffffffff83169081179091556040519081527f602cec4b1583b07d071161da5eb9589444d2459201e2fab7753dc941e9351c2190602001610c79565b600082815260026020908152604080832073ffffffffffffffffffffffffffffffffffffffff8516845290915290205460ff1661053f5761108d816111a0565b6110988360206111bf565b6040516020016110a9929190611717565b604080517fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0818403018152908290527f08c379a000000000000000000000000000000000000000000000000000000000825261060e916004016116d5565b600354604080517f50d25bcd000000000000000000000000000000000000000000000000000000008152905160009273ffffffffffffffffffffffffffffffffffffffff16916350d25bcd9160048083019260209291908290030181865afa158015611177573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061119b9190611798565b905090565b606061050673ffffffffffffffffffffffffffffffffffffffff831660145b606060006111ce8360026117e0565b6111d99060026117f7565b67ffffffffffffffff8111156111f1576111f16114d4565b6040519080825280601f01601f19166020018201604052801561121b576020820181803683370190505b5090507f3000000000000000000000000000000000000000000000000000000000000000816000815181106112525761125261180a565b60200101907effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916908160001a9053507f7800000000000000000000000000000000000000000000000000000000000000816001815181106112b5576112b561180a565b60200101907effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916908160001a90535060006112f18460026117e0565b6112fc9060016117f7565b90505b6001811115611399577f303132333435363738396162636465660000000000000000000000000000000085600f166010811061133d5761133d61180a565b1a60f81b8282815181106113535761135361180a565b60200101907effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916908160001a90535060049490941c9361139281611839565b90506112ff565b508315611402576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820181905260248201527f537472696e67733a20686578206c656e67746820696e73756666696369656e74604482015260640161060e565b9392505050565b60006020828403121561141b57600080fd5b81357fffffffff000000000000000000000000000000000000000000000000000000008116811461140257600080fd5b60006020828403121561145d57600080fd5b5035919050565b803573ffffffffffffffffffffffffffffffffffffffff8116811461148857600080fd5b919050565b60006020828403121561149f57600080fd5b61140282611464565b600080604083850312156114bb57600080fd5b823591506114cb60208401611464565b90509250929050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b60006020828403121561151557600080fd5b813567ffffffffffffffff8082111561152d57600080fd5b818401915084601f83011261154157600080fd5b813581811115611553576115536114d4565b604051601f82017fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0908116603f01168101908382118183101715611599576115996114d4565b816040528281528760208487010111156115b257600080fd5b826020860160208301376000928101602001929092525095945050505050565b600080602083850312156115e557600080fd5b823567ffffffffffffffff808211156115fd57600080fd5b818501915085601f83011261161157600080fd5b81358181111561162057600080fd5b86602082850101111561163257600080fd5b60209290920196919550909350505050565b60005b8381101561165f578181015183820152602001611647565b50506000910152565b60008151808452611680816020860160208601611644565b601f017fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0169290920160200192915050565b82151581526040602082015260006116cd6040830184611668565b949350505050565b6020815260006114026020830184611668565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601260045260246000fd5b7f416363657373436f6e74726f6c3a206163636f756e742000000000000000000081526000835161174f816017850160208801611644565b7f206973206d697373696e6720726f6c6520000000000000000000000000000000601791840191820152835161178c816028840160208801611644565b01602801949350505050565b6000602082840312156117aa57600080fd5b5051919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b8082028115828204841417610506576105066117b1565b80820180821115610506576105066117b1565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fd5b600081611848576118486117b1565b507fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff019056fea2646970667358221220f36eb65fa37152e61b564694e359053d541c6883441e6553a61f90f16f06ac6a64736f6c63430008110033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106101c45760003560e01c8063741bef1a116100f9578063d29dba9111610097578063e30c397811610071578063e30c397814610408578063f2fde38b14610426578063f5b541a614610439578063f9120af61461046057600080fd5b8063d29dba91146103d9578063d547741f146103ec578063d94ad837146103ff57600080fd5b806391d14854116100d357806391d14854146103655780639870d7fe146103ab578063a217fddf146103be578063ac8a584a146103c657600080fd5b8063741bef1a1461031f57806379ba50971461033f5780638da5cb5b1461034757600080fd5b806336568abe1161016657806353a15edc1161014057806353a15edc146102d05780636d70f7ae146102e35780636e04ff0d146102f6578063715018a61461031757600080fd5b806336568abe146102a15780633defb962146102b45780634585e33b146102bd57600080fd5b8063245a7bfc116101a2578063245a7bfc14610211578063248a9ca3146102565780632754aae1146102795780632f2ff15d1461028e57600080fd5b806301ffc9a7146101c9578063053f14da146101f157806319d8ac6114610208575b600080fd5b6101dc6101d7366004611409565b610473565b60405190151581526020015b60405180910390f35b6101fa60075481565b6040519081526020016101e8565b6101fa60085481565b6004546102319073ffffffffffffffffffffffffffffffffffffffff1681565b60405173ffffffffffffffffffffffffffffffffffffffff90911681526020016101e8565b6101fa61026436600461144b565b60009081526002602052604090206001015490565b61028c61028736600461148d565b61050c565b005b61028c61029c3660046114a8565b610543565b61028c6102af3660046114a8565b61056d565b6101fa60055481565b61028c6102cb366004611503565b610621565b61028c6102de36600461144b565b610786565b6101dc6102f136600461148d565b6107b9565b6103096103043660046115d2565b610806565b6040516101e89291906116b2565b61028c61081d565b6003546102319073ffffffffffffffffffffffffffffffffffffffff1681565b61028c610831565b60005473ffffffffffffffffffffffffffffffffffffffff16610231565b6101dc6103733660046114a8565b600091825260026020908152604080842073ffffffffffffffffffffffffffffffffffffffff93909316845291905290205460ff1690565b61028c6103b936600461148d565b6108e6565b6101fa600081565b61028c6103d436600461148d565b61099b565b61028c6103e736600461144b565b610a50565b61028c6103fa3660046114a8565b610a83565b6101fa60065481565b60015473ffffffffffffffffffffffffffffffffffffffff16610231565b61028c61043436600461148d565b610aa8565b6101fa7f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b92981565b61028c61046e36600461148d565b610b58565b60007fffffffff0000000000000000000000000000000000000000000000000000000082167f7965db0b00000000000000000000000000000000000000000000000000000000148061050657507f01ffc9a7000000000000000000000000000000000000000000000000000000007fffffffff000000000000000000000000000000000000000000000000000000008316145b92915050565b7f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b92961053681610c00565b61053f82610c0a565b5050565b60008281526002602052604090206001015461055e81610c00565b6105688383610c84565b505050565b73ffffffffffffffffffffffffffffffffffffffff81163314610617576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152602f60248201527f416363657373436f6e74726f6c3a2063616e206f6e6c792072656e6f756e636560448201527f20726f6c657320666f722073656c66000000000000000000000000000000000060648201526084015b60405180910390fd5b61053f8282610d78565b60008061062c610e33565b91509150806106bd576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152602160248201527f486f70654175746f6d6174696f6e3a2075706b656570206e6f74206e6565646560448201527f6400000000000000000000000000000000000000000000000000000000000000606482015260840161060e565b600782905542600855600480546040517f8733544300000000000000000000000000000000000000000000000000000000815291820184905273ffffffffffffffffffffffffffffffffffffffff1690638733544390602401600060405180830381600087803b15801561073057600080fd5b505af1158015610744573d6000803e3d6000fd5b5050604080518581524260208201527f945c1c4e99aa89f648fbfe3df471b916f719e16d960fcec0737d4d56bd696838935001905060405180910390a1505050565b7f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b9296107b081610c00565b61053f82610ebe565b73ffffffffffffffffffffffffffffffffffffffff811660009081527f6bc781d8c7f9885ebbb3cefbc18932c491038e2ae5c5b56447891e0bd98ea163602052604081205460ff16610506565b60006060610812610e33565b959194509092505050565b610825610ef3565b61082f6000610f74565b565b600154339073ffffffffffffffffffffffffffffffffffffffff1681146108da576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152602960248201527f4f776e61626c6532537465703a2063616c6c6572206973206e6f74207468652060448201527f6e6577206f776e65720000000000000000000000000000000000000000000000606482015260840161060e565b6108e381610f74565b50565b6108ee610ef3565b60408051808201909152600281527f3737000000000000000000000000000000000000000000000000000000000000602082015273ffffffffffffffffffffffffffffffffffffffff8216610970576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161060e91906116d5565b506108e37f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b92982610c84565b6109a3610ef3565b60408051808201909152600281527f3737000000000000000000000000000000000000000000000000000000000000602082015273ffffffffffffffffffffffffffffffffffffffff8216610a25576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161060e91906116d5565b506108e37f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b92982610d78565b7f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b929610a7a81610c00565b61053f82610fa5565b600082815260026020526040902060010154610a9e81610c00565b6105688383610d78565b610ab0610ef3565b6001805473ffffffffffffffffffffffffffffffffffffffff83167fffffffffffffffffffffffff00000000000000000000000000000000000000009091168117909155610b1360005473ffffffffffffffffffffffffffffffffffffffff1690565b73ffffffffffffffffffffffffffffffffffffffff167f38d16b8cac22d99fc7c124b9cd0de2d3fa1faef420bfe791d8c362d765e2270060405160405180910390a350565b7f97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b929610b8281610c00565b61053f82610fda565b6000805473ffffffffffffffffffffffffffffffffffffffff8381167fffffffffffffffffffffffff0000000000000000000000000000000000000000831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b6108e3813361104d565b600380547fffffffffffffffffffffffff00000000000000000000000000000000000000001673ffffffffffffffffffffffffffffffffffffffff83169081179091556040519081527f81d6cafd5ac0f5622e7437d9f7944c09c8da68fa4749117f58310f76e1aa96b8906020015b60405180910390a150565b600082815260026020908152604080832073ffffffffffffffffffffffffffffffffffffffff8516845290915290205460ff1661053f57600082815260026020908152604080832073ffffffffffffffffffffffffffffffffffffffff85168452909152902080547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00166001179055610d1a3390565b73ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff16837f2f8788117e7eff1d82e926ec794901d17c78024a50270940304540a733656f0d60405160405180910390a45050565b600082815260026020908152604080832073ffffffffffffffffffffffffffffffffffffffff8516845290915290205460ff161561053f57600082815260026020908152604080832073ffffffffffffffffffffffffffffffffffffffff8516808552925280832080547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0016905551339285917ff6391f5c32d9c69d2a47ea670b442974b53935d1edc7fd64eb21e047a839171b9190a45050565b600080610e3e611107565b91506000821190506000818015610e5b5750600554600854420310155b91506007548310610e8c576127106007546006540281610e7d57610e7d6116e8565b04600754840310159050610eae565b6127106007546006540281610ea357610ea36116e8565b048360075403101590505b8180610eb75750805b9150509091565b60068190556040518181527ffc6a7902b31c6ecdb0c5861232c559ad5a0836a4afdfd978472718132e48778190602001610c79565b60005473ffffffffffffffffffffffffffffffffffffffff16331461082f576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015260640161060e565b600180547fffffffffffffffffffffffff00000000000000000000000000000000000000001690556108e381610b8b565b60058190556040518181527fc2178046992f7ede7649071430a5471a38fa34dc920c308b50d50c3271519b6d90602001610c79565b600480547fffffffffffffffffffffffff00000000000000000000000000000000000000001673ffffffffffffffffffffffffffffffffffffffff83169081179091556040519081527f602cec4b1583b07d071161da5eb9589444d2459201e2fab7753dc941e9351c2190602001610c79565b600082815260026020908152604080832073ffffffffffffffffffffffffffffffffffffffff8516845290915290205460ff1661053f5761108d816111a0565b6110988360206111bf565b6040516020016110a9929190611717565b604080517fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0818403018152908290527f08c379a000000000000000000000000000000000000000000000000000000000825261060e916004016116d5565b600354604080517f50d25bcd000000000000000000000000000000000000000000000000000000008152905160009273ffffffffffffffffffffffffffffffffffffffff16916350d25bcd9160048083019260209291908290030181865afa158015611177573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061119b9190611798565b905090565b606061050673ffffffffffffffffffffffffffffffffffffffff831660145b606060006111ce8360026117e0565b6111d99060026117f7565b67ffffffffffffffff8111156111f1576111f16114d4565b6040519080825280601f01601f19166020018201604052801561121b576020820181803683370190505b5090507f3000000000000000000000000000000000000000000000000000000000000000816000815181106112525761125261180a565b60200101907effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916908160001a9053507f7800000000000000000000000000000000000000000000000000000000000000816001815181106112b5576112b561180a565b60200101907effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916908160001a90535060006112f18460026117e0565b6112fc9060016117f7565b90505b6001811115611399577f303132333435363738396162636465660000000000000000000000000000000085600f166010811061133d5761133d61180a565b1a60f81b8282815181106113535761135361180a565b60200101907effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916908160001a90535060049490941c9361139281611839565b90506112ff565b508315611402576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820181905260248201527f537472696e67733a20686578206c656e67746820696e73756666696369656e74604482015260640161060e565b9392505050565b60006020828403121561141b57600080fd5b81357fffffffff000000000000000000000000000000000000000000000000000000008116811461140257600080fd5b60006020828403121561145d57600080fd5b5035919050565b803573ffffffffffffffffffffffffffffffffffffffff8116811461148857600080fd5b919050565b60006020828403121561149f57600080fd5b61140282611464565b600080604083850312156114bb57600080fd5b823591506114cb60208401611464565b90509250929050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b60006020828403121561151557600080fd5b813567ffffffffffffffff8082111561152d57600080fd5b818401915084601f83011261154157600080fd5b813581811115611553576115536114d4565b604051601f82017fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0908116603f01168101908382118183101715611599576115996114d4565b816040528281528760208487010111156115b257600080fd5b826020860160208301376000928101602001929092525095945050505050565b600080602083850312156115e557600080fd5b823567ffffffffffffffff808211156115fd57600080fd5b818501915085601f83011261161157600080fd5b81358181111561162057600080fd5b86602082850101111561163257600080fd5b60209290920196919550909350505050565b60005b8381101561165f578181015183820152602001611647565b50506000910152565b60008151808452611680816020860160208601611644565b601f017fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0169290920160200192915050565b82151581526040602082015260006116cd6040830184611668565b949350505050565b6020815260006114026020830184611668565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601260045260246000fd5b7f416363657373436f6e74726f6c3a206163636f756e742000000000000000000081526000835161174f816017850160208801611644565b7f206973206d697373696e6720726f6c6520000000000000000000000000000000601791840191820152835161178c816028840160208801611644565b01602801949350505050565b6000602082840312156117aa57600080fd5b5051919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b8082028115828204841417610506576105066117b1565b80820180821115610506576105066117b1565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fd5b600081611848576118486117b1565b507fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff019056fea2646970667358221220f36eb65fa37152e61b564694e359053d541c6883441e6553a61f90f16f06ac6a64736f6c63430008110033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "acceptOwnership()": {
+        "details": "The new owner accepts the ownership transfer."
+      },
+      "getRoleAdmin(bytes32)": {
+        "details": "Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}."
+      },
+      "grantRole(bytes32,address)": {
+        "details": "Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleGranted} event."
+      },
+      "hasRole(bytes32,address)": {
+        "details": "Returns `true` if `account` has been granted `role`."
+      },
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "pendingOwner()": {
+        "details": "Returns the address of the pending owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+      },
+      "renounceRole(bytes32,address)": {
+        "details": "Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been revoked `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`. May emit a {RoleRevoked} event."
+      },
+      "revokeRole(bytes32,address)": {
+        "details": "Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleRevoked} event."
+      },
+      "supportsInterface(bytes4)": {
+        "details": "See {IERC165-supportsInterface}."
+      },
+      "transferOwnership(address)": {
+        "details": "Starts the ownership transfer of the contract to a new account. Replaces the pending transfer if there is one. Can only be called by the current owner."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 3951,
+        "contract": "contracts/HOPEPriceFeed/HopeAutomation.sol:HopeAutomation",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 4064,
+        "contract": "contracts/HOPEPriceFeed/HopeAutomation.sol:HopeAutomation",
+        "label": "_pendingOwner",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_address"
+      },
+      {
+        "astId": 2007,
+        "contract": "contracts/HOPEPriceFeed/HopeAutomation.sol:HopeAutomation",
+        "label": "_roles",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_bytes32,t_struct(RoleData)2002_storage)"
+      },
+      {
+        "astId": 784,
+        "contract": "contracts/HOPEPriceFeed/HopeAutomation.sol:HopeAutomation",
+        "label": "priceFeed",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_address"
+      },
+      {
+        "astId": 786,
+        "contract": "contracts/HOPEPriceFeed/HopeAutomation.sol:HopeAutomation",
+        "label": "aggregator",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_address"
+      },
+      {
+        "astId": 788,
+        "contract": "contracts/HOPEPriceFeed/HopeAutomation.sol:HopeAutomation",
+        "label": "heartbeat",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 790,
+        "contract": "contracts/HOPEPriceFeed/HopeAutomation.sol:HopeAutomation",
+        "label": "deviationThreshold",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 792,
+        "contract": "contracts/HOPEPriceFeed/HopeAutomation.sol:HopeAutomation",
+        "label": "lastPrice",
+        "offset": 0,
+        "slot": "7",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 794,
+        "contract": "contracts/HOPEPriceFeed/HopeAutomation.sol:HopeAutomation",
+        "label": "lastTimestamp",
+        "offset": 0,
+        "slot": "8",
+        "type": "t_uint256"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_bytes32": {
+        "encoding": "inplace",
+        "label": "bytes32",
+        "numberOfBytes": "32"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_bytes32,t_struct(RoleData)2002_storage)": {
+        "encoding": "mapping",
+        "key": "t_bytes32",
+        "label": "mapping(bytes32 => struct AccessControl.RoleData)",
+        "numberOfBytes": "32",
+        "value": "t_struct(RoleData)2002_storage"
+      },
+      "t_struct(RoleData)2002_storage": {
+        "encoding": "inplace",
+        "label": "struct AccessControl.RoleData",
+        "members": [
+          {
+            "astId": 1999,
+            "contract": "contracts/HOPEPriceFeed/HopeAutomation.sol:HopeAutomation",
+            "label": "members",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_mapping(t_address,t_bool)"
+          },
+          {
+            "astId": 2001,
+            "contract": "contracts/HOPEPriceFeed/HopeAutomation.sol:HopeAutomation",
+            "label": "adminRole",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_bytes32"
+          }
+        ],
+        "numberOfBytes": "64"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
