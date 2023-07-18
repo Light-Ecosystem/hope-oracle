@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0
+// SPDX-License-Identifier: LGPL-3.0
 pragma solidity 0.8.17;
 
 import {ERC20} from '../../dependencies/openzeppelin/ERC20.sol';
@@ -24,13 +24,7 @@ contract MintableERC20 is IERC20WithPermit, ERC20 {
     uint256 chainId = block.chainid;
 
     DOMAIN_SEPARATOR = keccak256(
-      abi.encode(
-        EIP712_DOMAIN,
-        keccak256(bytes(name)),
-        keccak256(EIP712_REVISION),
-        chainId,
-        address(this)
-      )
+      abi.encode(EIP712_DOMAIN, keccak256(bytes(name)), keccak256(EIP712_REVISION), chainId, address(this))
     );
     _setupDecimals(decimals);
   }

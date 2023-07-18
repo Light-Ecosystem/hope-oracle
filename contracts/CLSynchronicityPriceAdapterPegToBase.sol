@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: LGPL-3.0
 pragma solidity 0.8.17;
 
 import {AggregatorV2V3Interface} from './dependencies/chainlink/AggregatorV2V3Interface.sol';
@@ -6,7 +6,7 @@ import {ICLSynchronicityPriceAdapter} from './interfaces/ICLSynchronicityPriceAd
 
 /**
  * @title CLSynchronicityPriceAdapter
- * @author BGD Labs
+ * @author Hope Ecosystem
  * @notice Price adapter to calculate price of (Asset / Base) pair by using
  * @notice Chainlink Data Feeds for (Asset / Peg) and (Peg / Base) pairs.
  * @notice For example it can be used to calculate stETH / USD

@@ -30,15 +30,15 @@ interface IHopeOracle is IPriceOracleGetter {
   event FallbackOracleUpdated(address indexed fallbackOracle);
 
   /**
-  * @dev Emitted after the failover of an asset is activated
-  * @param asset The address of the asset
-  */
+   * @dev Emitted after the failover of an asset is activated
+   * @param asset The address of the asset
+   */
   event FailoverActivated(address indexed asset);
 
   /**
-  * @dev Emitted after the failover of an asset is deactivated
-  * @param asset The address of the asset
-  */
+   * @dev Emitted after the failover of an asset is deactivated
+   * @param asset The address of the asset
+   */
   event FailoverDeactivated(address indexed asset);
 
   /**
