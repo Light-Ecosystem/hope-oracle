@@ -10,24 +10,23 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const network = (process.env.FORK ? process.env.FORK : hre.network.name) as eEthereumNetwork;
   const isLive = hre.config.networks[network].live;
 
-  const assetToPegAggregatorAddress = '0xfdFD9C85aD200c506Cf9e21F1FD8dd01932FBB23'; // WBTC / BTC
-  const pegToBaseAggregatorAddress = '0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c'; // BTC / USD
-  const decimals = 8;
+  const ethToBaseAggregatorAddress = '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419'; // ETH/USD
+  const stEthAddress = '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'; // stETH
 
   // deploy wBTC price feed
   if (isLive) {
-    await deploy(DeployIDs.WBTCSynchronicityPriceAdapter_ID, {
+    await deploy(DeployIDs.WstETHSynchronicityPriceAdapter_ID, {
       from: deployer,
-      contract: 'WBTCSynchronicityPriceAdapter',
-      args: [pegToBaseAggregatorAddress, assetToPegAggregatorAddress, decimals],
+      contract: 'WstETHSynchronicityPriceAdapter',
+      args: [ethToBaseAggregatorAddress, stEthAddress],
       log: true,
     });
   }
 };
 
 // This script can only be run successfully once per market, core version, and network
-func.id = `WBTCPriceFeed`;
+func.id = `WstETHPriceFeed`;
 
-func.tags = ['WBTCPriceFeed'];
+func.tags = ['WstETHPriceFeed'];
 
 export default func;

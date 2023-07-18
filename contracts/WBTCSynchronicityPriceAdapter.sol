@@ -2,17 +2,17 @@
 pragma solidity 0.8.17;
 
 import {AggregatorV2V3Interface} from './dependencies/chainlink/AggregatorV2V3Interface.sol';
-import {ICLSynchronicityPriceAdapter} from './interfaces/ICLSynchronicityPriceAdapter.sol';
+import {IHESynchronicityPriceAdapter} from './interfaces/IHESynchronicityPriceAdapter.sol';
 
 /**
- * @title CLSynchronicityPriceAdapter
+ * @title HESynchronicityPriceAdapter
  * @author Hope Ecosystem
  * @notice Price adapter to calculate price of (Asset / Base) pair by using
  * @notice Chainlink Data Feeds for (Asset / Peg) and (Peg / Base) pairs.
  * @notice For example it can be used to calculate stETH / USD
  * @notice based on stETH / ETH and ETH / USD feeds.
  */
-contract CLSynchronicityPriceAdapterPegToBase is ICLSynchronicityPriceAdapter {
+contract WBTCSynchronicityPriceAdapter is IHESynchronicityPriceAdapter {
   /**
    * @notice Price feed for (Base / Peg) pair
    */
@@ -60,7 +60,7 @@ contract CLSynchronicityPriceAdapterPegToBase is ICLSynchronicityPriceAdapter {
     }
   }
 
-  /// @inheritdoc ICLSynchronicityPriceAdapter
+  /// @inheritdoc IHESynchronicityPriceAdapter
   function latestAnswer() public view virtual override returns (int256) {
     int256 assetToPegPrice = ASSET_TO_PEG.latestAnswer();
     int256 pegToBasePrice = PEG_TO_BASE.latestAnswer();
@@ -70,5 +70,15 @@ contract CLSynchronicityPriceAdapterPegToBase is ICLSynchronicityPriceAdapter {
     }
 
     return (assetToPegPrice * pegToBasePrice * int256(10 ** DECIMALS)) / (DENOMINATOR);
+  }
+
+  /// @inheritdoc IHESynchronicityPriceAdapter
+  function description() external view virtual override returns (string memory) {
+    return 'wBTC/USD';
+  }
+
+  /// @inheritdoc IHESynchronicityPriceAdapter
+  function decimals() external view virtual override returns (uint8) {
+    return DECIMALS;
   }
 }

@@ -27,14 +27,14 @@ export const Configs: { [key: string]: IBaseConfiguration } = {
   },
   [eEthereumNetwork.sepolia]: {
     PriceFeed_decimals: 8,
-    PriceFeed_heartbeat: 3600,
+    PriceFeed_heartbeat: 14400, // 4h
     PriceFeed_threshold: 50, // 0.5%
-    PriceFeed_operator: '0xcbeD65Db7E177D4875dDF5B67E13326A43a7B03f',
-    HOPE_address: '0x70C8C67CfbE228c7437Ec586a751a408e23355F4',
+    PriceFeed_operator: '0x22363A093C81E56b39F3551DbFa011f8A4952Da2',
+    HOPE_address: '0x498C60F24E078efA5B34a952c5777aDa39C1bADB',
     chainlinkEthUsdAggregatorProxy: '0x694AA1769357215DE4FAC081bf1f309aDC325306',
     chainlinkBtcUsdAggregatorProxy: '0x1b44F3514812d835EB1BDB0acB33d3fA3351Ee43',
-    Automation_operator: '0xcbeD65Db7E177D4875dDF5B67E13326A43a7B03f',
-    FallbackOracle_operator: '0xcbeD65Db7E177D4875dDF5B67E13326A43a7B03f',
+    Automation_operator: '0x22363A093C81E56b39F3551DbFa011f8A4952Da2',
+    FallbackOracle_operator: '0x22363A093C81E56b39F3551DbFa011f8A4952Da2',
   },
   hardhat: {
     PriceFeed_decimals: 8,

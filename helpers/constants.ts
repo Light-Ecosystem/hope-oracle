@@ -18,6 +18,7 @@ export const MOCK_CHAINLINK_AGGREGATORS_PRICES: { [key: string]: string } = {
   stHOPE: parseUnits('0.7', 8).toString(),
   WETH: parseUnits('2001', 8).toString(),
   ETH: parseUnits('2001', 8).toString(),
+  wstETH: parseUnits('2100', 8).toString(),
   DAI: parseUnits('1.001', 8).toString(),
   USDC: parseUnits('1.001', 8).toString(),
   USDT: parseUnits('1.001', 8).toString(),
@@ -47,13 +48,14 @@ export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 export const ReserveAssets: iParamsPerNetwork<SymbolMap<tEthereumAddress>> = {
   [eEthereumNetwork.sepolia]: {
-    DAI: '0xAd4979AE4a275c4f6bc194c14C3b3CFBcD435abb',
-    USDC: '0x06446E7Bd1f211C3189cfeCF3CDE488757eb5e4f',
-    WBTC: '0xAF48F7c5866c0Fd63492bAc0b7816c1933c4D43a',
-    WETH: '0xE55a23aaFb3a712BFae5BE96E0f61C745dedf33C',
-    USDT: '0x76127399A0CafeDB59615A93A7ACF8552c1aEE4c',
-    HOPE: '0x70C8C67CfbE228c7437Ec586a751a408e23355F4',
-    stHOPE: '0x03D69A55579496821D8FdF0769F0C1a4A195788A',
+    DAI: '0xc46EE5F997e71075871a7703e4DE68C0EA228c83',
+    USDT: '0x6E572751AaE03719Cd0b53B3551db323eA2e2050',
+    USDC: '0xD218270a11a3a8E614Ebf8AE8FD3D269a52ac114',
+    WETH: '0x6209f6CADe90416BecaAA48Ca693D2652ecc36D9',
+    wstETH: '0xf963aB230E0F2cF77dd6F834075D0cfa790BD443',
+    WBTC: '0x3740A76b06653bb3f00bD7EEF0A8E8aA32B2B6c5',
+    HOPE: '0x498C60F24E078efA5B34a952c5777aDa39C1bADB',
+    stHOPE: '0x04c3dc90DD5d90De92Fa226697CF17c5875f63Af',
   },
   [eEthereumNetwork.main]: {
     USDC: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
@@ -87,7 +89,8 @@ export const DeployIDs = {
   HopeAutomation_ID: `HopeAutomation-${MARKET_NAME}`,
   HopeOracle_ID: `HopeOracle-${MARKET_NAME}`,
   HopeFallbackOracle_ID: `HopeFallbackOracle-${MARKET_NAME}`,
-  CLSynchronicityPriceAdapterPegToBase_ID: `HopeWBTCPriceFeed-${MARKET_NAME}`,
+  WBTCSynchronicityPriceAdapter_ID: `HopeWBTCPriceFeed-${MARKET_NAME}`,
+  WstETHSynchronicityPriceAdapter_ID: `HopeWstETHPriceFeed-${MARKET_NAME}`,
   TESTNET_PRICE_AGGR_PREFIX: `-TestnetPriceAggregator-FallbackOracle`,
 };
 

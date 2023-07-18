@@ -14,15 +14,13 @@ describe('WBTCPriceFeed', () => {
     const WBTC_BTCMockAggregator = await MockAggregator.deploy(MOCK_CHAINLINK_AGGREGATORS_PRICES.WBTC_BTC);
     console.log('WBTC_BTCMockAggregator deploy address: ', WBTC_BTCMockAggregator.address);
 
-    const CLSynchronicityPriceAdapterPegToBase = await ethers.getContractFactory(
-      'CLSynchronicityPriceAdapterPegToBase'
-    );
-    const wBTCPriceAdapterPegToBase = await CLSynchronicityPriceAdapterPegToBase.deploy(
+    const WBTCSynchronicityPriceAdapter = await ethers.getContractFactory('WBTCSynchronicityPriceAdapter');
+    const wBTCPriceAdapterPegToBase = await WBTCSynchronicityPriceAdapter.deploy(
       BTCMockAggregator.address,
       WBTC_BTCMockAggregator.address,
       8
     );
-    console.log('wBTCPriceAdapterPegToBase deploy address: ', wBTCPriceAdapterPegToBase.address);
+    console.log('WBTCSynchronicityPriceAdapter deploy address: ', wBTCPriceAdapterPegToBase.address);
 
     return {
       owner,
