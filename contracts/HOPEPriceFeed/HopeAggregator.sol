@@ -8,7 +8,6 @@ contract HopeAggregator is HopeOneRole, IHopeAggregator {
   uint256 public constant override version = 1;
   uint8 public immutable override decimals;
   string public override description; // 'HOPE/USD'
-  address public transmitter;
   uint80 internal roundId;
 
   struct Transmission {
