@@ -3,7 +3,7 @@ import { waitForTx } from '../../helpers/tx';
 import { Configs } from '../../helpers/configs';
 import { getHOPEPriceFeed } from '../../helpers/contract-getter';
 
-task(`set-reserveTokens`, 'Setup reserve tokens for HOPEPriceFeed').setAction(
+task(`setup-ReserveTokens`, 'Setup reserve tokens for HOPEPriceFeed').setAction(
   async (_, { deployments, getNamedAccounts, ...hre }) => {
     const network = (process.env.FORK ? process.env.FORK : hre.network.name) as string;
 
@@ -16,6 +16,8 @@ task(`set-reserveTokens`, 'Setup reserve tokens for HOPEPriceFeed').setAction(
     console.log('HOPEPriceFeed Address:', HOPEPriceFeed.address);
     console.log('HOPEPriceFeed Setting ReserveTokens...\n');
 
+    await waitForTx(await HOPEPriceFeed.addOperator(operator));
+
     await waitForTx(
       await HOPEPriceFeed.connect(await hre.ethers.getSigner(operator)).setReserveTokens(
         [ETHMaskAddress, BTCMaskAddress],
@@ -23,5 +25,7 @@ task(`set-reserveTokens`, 'Setup reserve tokens for HOPEPriceFeed').setAction(
         [10, 1]
       )
     );
+
+    await waitForTx(await HOPEPriceFeed.removeOperator(operator));
   }
 );

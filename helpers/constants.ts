@@ -14,8 +14,8 @@ export const DEFAULT_NAMED_ACCOUNTS = {
 };
 
 export const MOCK_CHAINLINK_AGGREGATORS_PRICES: { [key: string]: string } = {
-  HOPE: parseUnits('0.7', 8).toString(),
-  stHOPE: parseUnits('0.7', 8).toString(),
+  HOPE: parseUnits('0.55', 8).toString(),
+  stHOPE: parseUnits('0.55', 8).toString(),
   WETH: parseUnits('2001', 8).toString(),
   ETH: parseUnits('2001', 8).toString(),
   wstETH: parseUnits('2100', 8).toString(),
@@ -67,11 +67,13 @@ export const ReserveAssets: iParamsPerNetwork<SymbolMap<tEthereumAddress>> = {
   },
   [eEthereumNetwork.goerli]: {
     DAI: '0x5B71dC777A8aDCba065A644e30BBEeB8fCca273f',
-    USDT: '0x3da37B4A2F5172580411DdcddDCcae857f9a7aE6',
-    USDC: '0x235eBFC0bE0E58cF267D1c5BCb8c03a002A711ed',
-    WETH: '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6',
-    HOPE: '0x9bA97e0913Dd0fbd4E5fedA936db9D1f1C632273',
-    stHOPE: '0x89009881287EB51256141265B2f250b9960AaeE5',
+    USDT: '0x1C6Cf7Df9dFC87d2C373FF12F713e3222356783f',
+    USDC: '0x832c2B8efb16Ffabc73e1F23D31f3B574Ff0b7F6',
+    WETH: '0x6Cc53D3AeaEe7aAfbd2Ac304AA64d017E6cb4f2a',
+    wstETH: '0x050af32f9FEA93231fCFf7a44181A2a7dA9b4A80',
+    WBTC: '0x5e457e88503c47C85C106edB4e27208bBBA26d7f',
+    HOPE: '0xdC857E0d4C850deAe3a7735390243d3c444E552F',
+    stHOPE: '0x09B4621e2A9dBd37550dC4923E60Ff0782Ef9250',
   },
   hardhat: {
     USDC: '0x6A9d4913AC8266A1dEbCfC6d5B6Ea275Fd19cD85',

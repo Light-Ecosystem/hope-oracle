@@ -29,9 +29,13 @@ export interface IBaseConfiguration {
   PriceFeed_heartbeat: Number;
   PriceFeed_threshold: Number;
   PriceFeed_operator: string;
+  PriceFeed_owner: string;
   HOPE_address: string;
   chainlinkEthUsdAggregatorProxy: string;
   chainlinkBtcUsdAggregatorProxy: string;
   Automation_operator: string;
+  Automation_owner: string;
+  Aggregator_owner: string;
   FallbackOracle_operator: string;
+  FallbackOracle_owner: string;
 }
