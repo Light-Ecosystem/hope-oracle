@@ -3,7 +3,7 @@ import { waitForTx } from '../../helpers/tx';
 import { Configs } from '../../helpers/configs';
 import { getHOPEPriceFeed } from '../../helpers/contract-getter';
 
-task(`setup-ReserveTokens`, 'Setup reserve tokens for HOPEPriceFeed').setAction(
+task(`setup-reserveTokens`, 'Setup reserve tokens for HOPEPriceFeed').setAction(
   async (_, { deployments, getNamedAccounts, ...hre }) => {
     const network = (process.env.FORK ? process.env.FORK : hre.network.name) as string;
 

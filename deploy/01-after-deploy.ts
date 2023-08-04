@@ -19,6 +19,8 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ..
   await hre.run('transfer-ownership');
 
   await hre.run('print-deployments');
+
+  await hre.run('view-roles');
 };
 
 func.tags = ['after-deploy'];

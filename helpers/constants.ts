@@ -66,7 +66,6 @@ export const ReserveAssets: iParamsPerNetwork<SymbolMap<tEthereumAddress>> = {
     stHOPE: '0xF5C6d9Fc73991F687f158FE30D4A77691a9Fd4d8',
   },
   [eEthereumNetwork.goerli]: {
-    DAI: '0x5B71dC777A8aDCba065A644e30BBEeB8fCca273f',
     USDT: '0x1C6Cf7Df9dFC87d2C373FF12F713e3222356783f',
     USDC: '0x832c2B8efb16Ffabc73e1F23D31f3B574Ff0b7F6',
     WETH: '0x6Cc53D3AeaEe7aAfbd2Ac304AA64d017E6cb4f2a',

@@ -20,8 +20,8 @@ export const Configs: { [key: string]: IBaseConfiguration } = {
   },
   [eEthereumNetwork.goerli]: {
     PriceFeed_decimals: 8,
-    PriceFeed_heartbeat: 14400, // 4h
-    PriceFeed_threshold: 50, // 0.5%
+    PriceFeed_heartbeat: 43200, // 12h
+    PriceFeed_threshold: 100, // 1%
     PriceFeed_operator: '0x3141f8D6BE4e4d9137577798C1e127Db81D196d7',
     PriceFeed_owner: '0xc6C1eF70746F6Bed0A43C912B2B2047f25d3eA87',
     HOPE_address: '0xdC857E0d4C850deAe3a7735390243d3c444E552F',

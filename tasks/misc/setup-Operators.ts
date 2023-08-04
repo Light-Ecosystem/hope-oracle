@@ -3,7 +3,7 @@ import { getWalletBalances, waitForTx } from '../../helpers/tx';
 import { getHOPEPriceFeed, getHopeAutomation, getHopeFallbackOracle } from '../../helpers/contract-getter';
 import { Configs } from '../../helpers/configs';
 
-task(`setup-Operators`, 'Setup operators for each contract').setAction(
+task(`setup-operators`, 'Setup operators for each contract').setAction(
   async (_, { deployments, getNamedAccounts, ...hre }) => {
     const network = (process.env.FORK ? process.env.FORK : hre.network.name) as string;
 
