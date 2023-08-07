@@ -16,6 +16,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   // deploy wBTC price feed
   if (isLive) {
+    console.log('[NOTICE] Deployment of wBTC price feed');
     await deploy(DeployIDs.WBTCSynchronicityPriceAdapter_ID, {
       from: deployer,
       contract: 'WBTCSynchronicityPriceAdapter',

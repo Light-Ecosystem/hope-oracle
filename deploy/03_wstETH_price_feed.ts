@@ -13,8 +13,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const ethToBaseAggregatorAddress = '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419'; // ETH/USD
   const stEthAddress = '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'; // stETH
 
-  // deploy wBTC price feed
+  // deploy wstETH price feed
   if (isLive) {
+    console.log('[NOTICE] Deployment of wstETH price feed');
     await deploy(DeployIDs.WstETHSynchronicityPriceAdapter_ID, {
       from: deployer,
       contract: 'WstETHSynchronicityPriceAdapter',

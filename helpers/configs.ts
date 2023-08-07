@@ -5,8 +5,8 @@ export const { MARKET_NAME } = process.env;
 export const Configs: { [key: string]: IBaseConfiguration } = {
   [eEthereumNetwork.main]: {
     PriceFeed_decimals: 8,
-    PriceFeed_heartbeat: 14400,
-    PriceFeed_threshold: 100,
+    PriceFeed_heartbeat: 43200, // 12h
+    PriceFeed_threshold: 100, // 1%
     PriceFeed_operator: '',
     PriceFeed_owner: '',
     HOPE_address: '0xc353Bf07405304AeaB75F4C2Fac7E88D6A68f98e',
