@@ -1,6 +1,9 @@
 {
   "name": "hope-oracle",
   "version": "1.0.0",
+  "description": "The Hope Ecosystem Oracle",
+  "repository": "https://github.com/Light-Ecosystem/hope-oracle",
+  "author": "Hope.money",
   "engines": {
     "node": ">=16.0.0"
   },
