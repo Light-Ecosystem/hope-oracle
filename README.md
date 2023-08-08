@@ -21,6 +21,8 @@ July 2023
 - [MetaTrust](./audits/29-07-2023_MetaTrust_Hope-oracle.pdf)
 - [Beosin](./audits/19-07-2023_Beosin_Hope-oracle.pdf)
 
+There is also an active [bug bounty](https://static.hope.money/bug-bounty.html) for issues which can lead to substantial loss of money, critical bugs such as a broken live-ness condition, or irreversible loss of funds.
+
 ## Install
 
 1. Clone the repo
@@ -96,4 +98,4 @@ npx hardhat transfer-ownership --network main
 
 ## Connect with the community
 
-You can join the [Discord](https://discord.com/invite/hopemoneyofficial) channel or the [Governance Forum](https://docs.hope.money/lightdao-governance/governance-guide) to ask questions about the protocol or talk about Hope Ecosystem with other peers.
+You can join the [Discord](https://discord.com/invite/hopemoneyofficial) channel or the [Governance Forum](https://docs.hope.money/lightdao-governance/governance-guide) to ask questions about the protocol or talk about HOPE Ecosystem with other peers.

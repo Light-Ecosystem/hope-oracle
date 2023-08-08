@@ -1,6 +1,6 @@
 # HOPEPriceFeed Configuration
 
-The design principles of HOPEPriceFeed are described in: [HOPE price peed](./HOPEPriceFeed.pdf)
+The design principles of HOPEPriceFeed are described in: [HOPE price peed](../docs/HOPEPriceFeed.pdf)
 
 `configs.js` details the constructor parameters that are passed in when deploying the HOPEPriceFeed.
 
