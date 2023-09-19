@@ -3,14 +3,13 @@ import {
   getCommonNetworkConfig,
   hardhatNetworkSettings,
   loadTasks,
-
 } from './helpers/hardhat-config-helpers';
 import { eEthereumNetwork } from './helpers/types';
-import {DEFAULT_NAMED_ACCOUNTS} from "./helpers/constants";
+import { DEFAULT_NAMED_ACCOUNTS } from './helpers/constants';
 
-import { HardhatUserConfig } from "hardhat/config";
-import "@nomicfoundation/hardhat-toolbox";
-import "hardhat-contract-sizer";
+import { HardhatUserConfig } from 'hardhat/config';
+import '@nomicfoundation/hardhat-toolbox';
+import 'hardhat-contract-sizer';
 import 'hardhat-abi-exporter';
 import 'hardhat-deploy';
 import '@nomiclabs/hardhat-ethers';
@@ -57,8 +56,12 @@ const config: HardhatUserConfig = {
       ...hardhatNetworkSettings,
     },
     main: getCommonNetworkConfig(eEthereumNetwork.main, 1),
+    [eEthereumNetwork.arbi_main]: getCommonNetworkConfig(eEthereumNetwork.arbi_main, 42161),
+    [eEthereumNetwork.base_main]: getCommonNetworkConfig(eEthereumNetwork.base_main, 8453),
     [eEthereumNetwork.goerli]: getCommonNetworkConfig(eEthereumNetwork.goerli, 5),
     [eEthereumNetwork.sepolia]: getCommonNetworkConfig(eEthereumNetwork.sepolia, 11155111),
+    [eEthereumNetwork.arbi_goerli]: getCommonNetworkConfig(eEthereumNetwork.arbi_goerli, 421613),
+    [eEthereumNetwork.base_goerli]: getCommonNetworkConfig(eEthereumNetwork.base_goerli, 84531),
   },
   namedAccounts: {
     ...DEFAULT_NAMED_ACCOUNTS,

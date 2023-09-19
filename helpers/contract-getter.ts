@@ -64,5 +64,8 @@ export const getHopeAutomation = async (address?: tEthereumAddress): Promise<Hop
 export const getHopeAggregator = async (address?: tEthereumAddress): Promise<HopeAutomation> =>
   getContract('HopeAggregator', address || (await hre.deployments.get(DeployIDs.HopeAggregator_ID)).address);
 
+export const getHopeAggregatorL2 = async (address?: tEthereumAddress): Promise<HopeAutomation> =>
+  getContract('HopeAggregatorL2', address || (await hre.deployments.get(DeployIDs.HopeAggregatorL2_ID)).address);
+
 export const getHopeFallbackOracle = async (address?: tEthereumAddress): Promise<HopeFallbackOracle> =>
   getContract('HopeFallbackOracle', address || (await hre.deployments.get(DeployIDs.HopeFallbackOracle_ID)).address);

@@ -9,6 +9,10 @@ export enum eEthereumNetwork {
   rinkeby = 'rinkeby',
   goerli = 'goerli',
   sepolia = 'sepolia',
+  arbi_goerli = 'arbitrum-goerli',
+  arbi_main = 'arbitrum-mainnet',
+  base_goerli = 'base-goerli',
+  base_main = 'base-mainnet',
 }
 export type iParamsPerNetwork<T> = {
   [k in eEthereumNetwork]?: T;

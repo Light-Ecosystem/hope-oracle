@@ -3,14 +3,14 @@ import { DeployFunction } from 'hardhat-deploy/types';
 import { Configs } from '../../helpers/configs';
 import { DeployIDs } from '../../helpers/constants';
 import { eEthereumNetwork } from '../../helpers/types';
-import { waitForTx } from '../../helpers/tx';
+import { waitForTx, isL2Network } from '../../helpers/tx';
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { getNamedAccounts, deployments, ethers } = hre;
   const { deploy } = deployments;
   const { deployer, operator } = await getNamedAccounts();
   const network = (process.env.FORK ? process.env.FORK : hre.network.name) as eEthereumNetwork;
-  const isLive = hre.config.networks[network].live;
+  const isL2 = isL2Network(network);
 
   const ETHMaskAddress = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';
   const BTCMaskAddress = '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB';
@@ -27,6 +27,18 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     args: [ETHMaskAddress, BTCMaskAddress, Configs[network].HOPE_address, K],
     log: true,
   });
+
+  if (isL2) {
+    // 2. Deploy HopeAggregatorL2
+    await deploy(DeployIDs.HopeAggregatorL2_ID, {
+      from: deployer,
+      contract: 'HopeAggregatorL2',
+      args: [HOPEPriceFeed.address, Configs[network].PriceFeed_decimals, 'HOPE/USD'],
+      log: true,
+    });
+
+    return;
+  }
 
   // 2. Deploy HopeAggregator
   const HopeAggregator = await deploy(DeployIDs.HopeAggregator_ID, {

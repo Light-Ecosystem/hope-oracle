@@ -2,7 +2,7 @@ import { Contract, ContractTransaction, Signer } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import Bluebird from 'bluebird';
 import { formatEther } from 'ethers/lib/utils';
-import { tEthereumAddress } from './types';
+import { tEthereumAddress, eEthereumNetwork } from './types';
 
 declare var hre: HardhatRuntimeEnvironment;
 
@@ -40,4 +40,19 @@ export const getContract = async <ContractType extends Contract>(
     artifact.abi,
     address || (await (await hre.deployments.get(id)).address)
   ) as any as ContractType;
+};
+
+export const isL2Network = (networkName: eEthereumNetwork) => {
+  switch (networkName) {
+    case eEthereumNetwork.arbi_goerli:
+      return true;
+    case eEthereumNetwork.arbi_main:
+      return true;
+    case eEthereumNetwork.base_goerli:
+      return true;
+    case eEthereumNetwork.base_main:
+      return true;
+    default:
+      return false;
+  }
 };

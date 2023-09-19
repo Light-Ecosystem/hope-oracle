@@ -27,10 +27,16 @@ export const NETWORKS_RPC_URL: iParamsPerNetwork<string> = {
 
   [eEthereumNetwork.goerli]: `https://goerli.infura.io/v3/${getInfuraKey(eEthereumNetwork.goerli)}`,
   [eEthereumNetwork.sepolia]: `https://sepolia.infura.io/v3/${getInfuraKey(eEthereumNetwork.sepolia)}`,
+  [eEthereumNetwork.arbi_goerli]: `https://arbitrum-goerli.infura.io/v3/${getInfuraKey(eEthereumNetwork.goerli)}`,
+  [eEthereumNetwork.arbi_main]: `https://arbitrum-mainnet.infura.io/v3/${getInfuraKey(eEthereumNetwork.goerli)}`,
+  [eEthereumNetwork.base_goerli]: 'https://1rpc.io/base-goerli',
+  [eEthereumNetwork.base_main]: 'https://base-mainnet.public.blastapi.io',
 };
 
 export const LIVE_NETWORKS: iParamsPerNetwork<boolean> = {
   [eEthereumNetwork.main]: true,
+  [eEthereumNetwork.arbi_main]: true,
+  [eEthereumNetwork.base_main]: true,
 };
 
 export const loadTasks = (taskFolders: string[]): void =>
