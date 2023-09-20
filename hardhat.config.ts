@@ -1,5 +1,7 @@
 import {
   ETHERSCAN_KEY,
+  ARBISCAN_KEY,
+  BASESCAN_KEY,
   getCommonNetworkConfig,
   hardhatNetworkSettings,
   loadTasks,
@@ -55,21 +57,96 @@ const config: HardhatUserConfig = {
       url: 'http://127.0.0.1:8545',
       ...hardhatNetworkSettings,
     },
-    main: getCommonNetworkConfig(eEthereumNetwork.main, 1),
-    [eEthereumNetwork.arbi_main]: getCommonNetworkConfig(eEthereumNetwork.arbi_main, 42161),
-    [eEthereumNetwork.base_main]: getCommonNetworkConfig(eEthereumNetwork.base_main, 8453),
-    [eEthereumNetwork.goerli]: getCommonNetworkConfig(eEthereumNetwork.goerli, 5),
-    [eEthereumNetwork.sepolia]: getCommonNetworkConfig(eEthereumNetwork.sepolia, 11155111),
-    [eEthereumNetwork.arbi_goerli]: getCommonNetworkConfig(eEthereumNetwork.arbi_goerli, 421613),
-    [eEthereumNetwork.base_goerli]: getCommonNetworkConfig(eEthereumNetwork.base_goerli, 84531),
+    main: {
+      ...getCommonNetworkConfig(eEthereumNetwork.main, 1),
+      verify: {
+        etherscan: {
+          apiKey: ETHERSCAN_KEY,
+        },
+      },
+    },
+    [eEthereumNetwork.arbi_main]: {
+      ...getCommonNetworkConfig(eEthereumNetwork.arbi_main, 42161),
+      verify: {
+        etherscan: {
+          apiKey: `${ARBISCAN_KEY}`,
+        },
+      },
+    },
+    [eEthereumNetwork.base_main]: {
+      ...getCommonNetworkConfig(eEthereumNetwork.base_main, 8453),
+      verify: {
+        etherscan: {
+          apiUrl: 'https://api.basescan.org/api',
+          apiKey: `${BASESCAN_KEY}`,
+        },
+      },
+    },
+    [eEthereumNetwork.goerli]: {
+      ...getCommonNetworkConfig(eEthereumNetwork.goerli, 5),
+      verify: {
+        etherscan: {
+          apiKey: ETHERSCAN_KEY,
+        },
+      },
+    },
+    [eEthereumNetwork.sepolia]: {
+      ...getCommonNetworkConfig(eEthereumNetwork.sepolia, 11155111),
+      verify: {
+        etherscan: {
+          apiKey: ETHERSCAN_KEY,
+        },
+      },
+    },
+    [eEthereumNetwork.arbi_goerli]: {
+      ...getCommonNetworkConfig(eEthereumNetwork.arbi_goerli, 421613),
+      verify: {
+        etherscan: {
+          apiKey: `${ARBISCAN_KEY}`,
+        },
+      },
+    },
+    [eEthereumNetwork.base_goerli]: {
+      ...getCommonNetworkConfig(eEthereumNetwork.base_goerli, 84531),
+      verify: {
+        etherscan: {
+          apiUrl: 'https://api-goerli.basescan.org/api',
+          apiKey: `${BASESCAN_KEY}`,
+        },
+      },
+    },
   },
   namedAccounts: {
     ...DEFAULT_NAMED_ACCOUNTS,
   },
-  verify: {
-    etherscan: {
-      apiKey: ETHERSCAN_KEY,
+  etherscan: {
+    apiKey: {
+      mainnet: `${ETHERSCAN_KEY}`,
+      arbitrumOne: `${ARBISCAN_KEY}`,
+      goerli: `${ETHERSCAN_KEY}`,
+      sepolia: `${ETHERSCAN_KEY}`,
+      arbitrumGoerli: `${ARBISCAN_KEY}`,
+      baseGoerli: `${BASESCAN_KEY}`,
+      baseMainnet: `${BASESCAN_KEY}`,
     },
+    customChains: [
+      {
+        network: 'baseGoerli',
+        chainId: 84531,
+        urls: {
+          apiURL: 'https://api-goerli.basescan.org/api',
+          browserURL: 'https://goerli.basescan.org',
+        },
+      },
+      {
+        network: 'baseMainnet',
+        chainId: 8453,
+        urls: {
+          apiURL: 'https://api.basescan.org/api',
+          browserURL: 'https://basescan.org',
+        },
+      },
+    ],
   },
 };
 

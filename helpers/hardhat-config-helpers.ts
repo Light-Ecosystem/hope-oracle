@@ -29,8 +29,8 @@ export const NETWORKS_RPC_URL: iParamsPerNetwork<string> = {
   [eEthereumNetwork.sepolia]: `https://sepolia.infura.io/v3/${getInfuraKey(eEthereumNetwork.sepolia)}`,
   [eEthereumNetwork.arbi_goerli]: `https://arbitrum-goerli.infura.io/v3/${getInfuraKey(eEthereumNetwork.goerli)}`,
   [eEthereumNetwork.arbi_main]: `https://arbitrum-mainnet.infura.io/v3/${getInfuraKey(eEthereumNetwork.goerli)}`,
-  [eEthereumNetwork.base_goerli]: 'https://1rpc.io/base-goerli',
-  [eEthereumNetwork.base_main]: 'https://base-mainnet.public.blastapi.io',
+  [eEthereumNetwork.base_goerli]: 'https://goerli.base.org',
+  [eEthereumNetwork.base_main]: 'https://mainnet.base.org',
 };
 
 export const LIVE_NETWORKS: iParamsPerNetwork<boolean> = {
@@ -82,3 +82,5 @@ export const hardhatNetworkSettings = {
 };
 
 export const ETHERSCAN_KEY = process.env.ETHERSCAN_KEY || '';
+export const BASESCAN_KEY = process.env.BASESCAN_KEY || '';
+export const ARBISCAN_KEY = process.env.ARBISCAN_KEY || '';

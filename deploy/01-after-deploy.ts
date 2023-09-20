@@ -11,12 +11,16 @@ const func: DeployFunction = async function ({ getNamedAccounts, deployments, ..
   const network = (process.env.FORK ? process.env.FORK : hre.network.name) as eEthereumNetwork;
   const isLive = hre.config.networks[network].live;
 
-  // Setup operators for each contract
-  await hre.run('setup-operators');
   // Setup reserve tokens for HOPEPriceFeed
   await hre.run('setup-reserveTokens');
-  // Transfer Ownership
-  await hre.run('transfer-ownership');
+
+  // Setup operators for each contract
+  await hre.run('setup-operators');
+
+  if (isLive) {
+    // Transfer Ownership
+    await hre.run('transfer-ownership');
+  }
 
   await hre.run('print-deployments');
 
