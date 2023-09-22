@@ -84,7 +84,7 @@ export const Configs: { [key: string]: IBaseConfiguration } = {
     PriceFeed_threshold: 100, // 1%
     PriceFeed_operator: '0x1Ee532cf775be02E0B306571e3555321FC75988d',
     PriceFeed_owner: '0xcbeD65Db7E177D4875dDF5B67E13326A43a7B03f',
-    HOPE_address: '0xdC857E0d4C850deAe3a7735390243d3c444E552F',
+    HOPE_address: '0x26100653722f1304B172f0B07e83dB60b9ef0296',
     chainlinkEthUsdAggregatorProxy: '0xcD2A119bD1F7DF95d706DE6F2057fDD45A0503E2',
     chainlinkBtcUsdAggregatorProxy: '0xAC15714c08986DACC0379193e22382736796496f',
     Automation_operator: '0x1Ee532cf775be02E0B306571e3555321FC75988d',
