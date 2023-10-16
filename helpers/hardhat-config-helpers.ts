@@ -81,6 +81,18 @@ export const hardhatNetworkSettings = {
     : undefined,
 };
 
+export const hardhatForkNetworkSettings = {
+  accounts: !!MNEMONIC
+    ? {
+        mnemonic: MNEMONIC,
+        path: MNEMONIC_PATH,
+        initialIndex: 0,
+        count: 10,
+      }
+    : undefined,
+  live: true,
+};
+
 export const ETHERSCAN_KEY = process.env.ETHERSCAN_KEY || '';
 export const BASESCAN_KEY = process.env.BASESCAN_KEY || '';
 export const ARBISCAN_KEY = process.env.ARBISCAN_KEY || '';

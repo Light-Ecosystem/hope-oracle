@@ -1,5 +1,6 @@
 import { Contract, ContractTransaction, Signer } from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
+import { Receipt } from 'hardhat-deploy/types';
 import Bluebird from 'bluebird';
 import { formatEther } from 'ethers/lib/utils';
 import { tEthereumAddress, eEthereumNetwork } from './types';
@@ -52,7 +53,24 @@ export const isL2Network = (networkName: eEthereumNetwork) => {
       return true;
     case eEthereumNetwork.base_main:
       return true;
+    case eEthereumNetwork.hardhat:
+      return true;
     default:
       return false;
+  }
+};
+
+export const fillNoneTransaction = async function (hre: HardhatRuntimeEnvironment, count: number) {
+  const { deployments, getNamedAccounts } = hre;
+  const { deployer } = await getNamedAccounts();
+  const { rawTx } = deployments;
+  for (let i = 0; i < count; i++) {
+    const tx: Receipt = await rawTx({
+      from: deployer,
+      to: deployer,
+      data: '0x',
+      log: true,
+    });
+    console.log(`fillNoneTransaction ${tx.transactionHash}`);
   }
 };

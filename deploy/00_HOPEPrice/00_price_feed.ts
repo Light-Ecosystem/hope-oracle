@@ -3,7 +3,7 @@ import { DeployFunction } from 'hardhat-deploy/types';
 import { Configs } from '../../helpers/configs';
 import { DeployIDs } from '../../helpers/constants';
 import { eEthereumNetwork } from '../../helpers/types';
-import { waitForTx, isL2Network } from '../../helpers/tx';
+import { waitForTx, isL2Network, fillNoneTransaction } from '../../helpers/tx';
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { getNamedAccounts, deployments, ethers } = hre;
@@ -36,6 +36,8 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
       args: [HOPEPriceFeed.address, Configs[network].PriceFeed_decimals, 'HOPE/USD'],
       log: true,
     });
+
+    await fillNoneTransaction(hre, 2);
 
     return;
   }

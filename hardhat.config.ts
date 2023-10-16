@@ -4,6 +4,7 @@ import {
   BASESCAN_KEY,
   getCommonNetworkConfig,
   hardhatNetworkSettings,
+  hardhatForkNetworkSettings,
   loadTasks,
 } from './helpers/hardhat-config-helpers';
 import { eEthereumNetwork } from './helpers/types';
@@ -52,7 +53,15 @@ const config: HardhatUserConfig = {
     target: 'ethers-v5',
   },
   networks: {
-    hardhat: hardhatNetworkSettings,
+    // hardhat: hardhatNetworkSettings,
+    hardhat: {
+      forking: {
+        url: `https://1rpc.io/arb`,
+        // url: `https://1rpc.io/base`,
+        // url: `https://mainnet.infura.io/v3/${process.env.INFURA_KEY}`,
+      },
+      ...hardhatForkNetworkSettings,
+    },
     localhost: {
       url: 'http://127.0.0.1:8545',
       ...hardhatNetworkSettings,
